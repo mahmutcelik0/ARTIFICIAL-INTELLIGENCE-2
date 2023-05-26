@@ -18,10 +18,10 @@ values = {
 def set_level_of_hardness():
     match values["hardness_level"]:
         case 1:
-            values["dataset_length"] = 15
+            values["dataset_length"] = 600
             values["path_of_folder"] = os.path.join("..", "1-Easy")
         case 2:
-            values["dataset_length"] = 100
+            values["dataset_length"] = 300
             values["path_of_folder"] = os.path.join("..", "2-Medium")
         case 3:
             values["dataset_length"] = 1000
