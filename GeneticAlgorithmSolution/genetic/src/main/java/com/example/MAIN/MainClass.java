@@ -61,6 +61,24 @@ public class MainClass {
 //        System.out.println("AFTER");
 //        chr1.printChromosomeGenes();
 
+        //PRINT BEST CONTROL
+//        Generation generation = new Generation();
+//        generation.fillGenerationRandomly();
+//        generation.printGeneration();
+//        generation.printTheBestChromosome(1);
+
+        //PRINT WORST CONTROL
+//        Generation generation = new Generation();
+//        generation.fillGenerationRandomly();
+//        generation.printGeneration();
+//        generation.printTheWorstChromosome(1);
+
+        //PRINT MEAN CONTROL
+        Generation generation = new Generation();
+        generation.fillGenerationRandomly();
+        generation.printGeneration();
+        generation.meanOfFitnessValues(1);
+
 
     }
 }
