@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="272e8ccc-7ae2-48d0-a9f1-ef275e7dd306" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../BruteForceApproach/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BruteForceApproach/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BruteForceApproach/.idea/PROJECT-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../BruteForceApproach/.idea/PROJECT-2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BruteForceApproach/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../BruteForceApproach/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BruteForceApproach/bruteforceapproach.py" beforeDir="false" afterPath="$PROJECT_DIR$/../BruteForceApproach/bruteforceapproach.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RandomDatasetGenerator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/RandomDatasetGenerator/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/DifferentDataSetsForPlots/2/knapsack_file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/DifferentDataSetsForPlots/2/knapsack_file.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/com/example/CALCULATION/FitnessCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/com/example/CALCULATION/FitnessCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/com/example/MAIN/Generation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/com/example/MAIN/Generation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/com/example/MAIN/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/com/example/MAIN/MainClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/com/example/MAIN/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/../GeneticAlgorithmSolution/genetic/src/main/java/com/example/MAIN/Solution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +40,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/mahmu/Desktop/DERSLER-3-2/YAPAY ZEKA/PROJECT-2/BruteForceApproach/bruteforceapproach.py",
+    "last_opened_file_path": "C:/Users/mahmu/Desktop/DERSLER-3-2/YAPAY ZEKA/PROJECT-2/BruteForceApproach",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -50,6 +57,7 @@
       <option name="presentableId" value="Default" />
       <updated>1685086391510</updated>
       <workItem from="1685086395681" duration="11231000" />
+      <workItem from="1685209032089" duration="44000" />
     </task>
     <servers />
   </component>

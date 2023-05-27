@@ -6,7 +6,7 @@ public enum Constants {
     ELITCHROMOCOUNT(2),
     ELITISMPERCENT(100),
     MUTATIONPERCENT(100),
-    STOPCOUNT(50);
+    STOPCOUNT(DataSet.getWeights().size());
 
 
     private final int number;

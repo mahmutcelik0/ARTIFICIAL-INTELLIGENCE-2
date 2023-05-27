@@ -196,13 +196,18 @@ public class Generation {
     public void normalMutation(Chromosome chromosome){
         double randomPercent = random.nextDouble(0,100);
         if(randomPercent < Constants.MUTATIONPERCENT.getNumber()){
+            int beginningFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
             int randomGene = random.nextInt(0, Constants.LENGTHOFDATASET.getNumber());
-            System.out.println("RANDOM INDEX IS: "+ randomGene);
             int[] temp = chromosome.getGeneOfChromosome();
-            System.out.println("RANDOM CURRENT VALUE: "+ temp[randomGene]);
             temp[randomGene] = temp[randomGene] == 1 ? 0 : 1; //1 ise 0, 0 ise 1 yapılır
-            chromosome.setGeneOfChromosome(temp.clone());
-            System.out.println("RANDOM AFTER CHANGE: "+ temp[randomGene]);
+
+            int afterMutationFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
+            if(beginningFitnessValue > 0 && afterMutationFitnessValue!=0){ //AŞMA OLMUYORSA
+                chromosome.setGeneOfChromosome(temp.clone());
+            }
+
         }
     }
 
@@ -210,7 +215,7 @@ public class Generation {
         Map.Entry<Chromosome, Integer> maxEntry =  Collections.max(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
         System.out.print(number+". GENERATION'S BEST:\t");
         maxEntry.getKey().printChromosomeGenes();
-        System.out.print("\t"+maxEntry.getValue()+"\n");
+        System.out.print("\t VALUE:"+maxEntry.getValue()+"\n");
     }
 
     public void printTheWorstChromosome(int number){

@@ -5,7 +5,7 @@ import com.example.CONSTANT.DataSet;
 
 public class MainClass {
     public static void main(String[] args) throws CloneNotSupportedException {
-        DataSet.fillData(1); // DON'T REMOVE IT
+        DataSet.fillData(2); // DON'T REMOVE IT
         Solution solution = new Solution();
         solution.solve();
 //        int[] myArray = {0,0,0,1,1,0,0,0,0,0};

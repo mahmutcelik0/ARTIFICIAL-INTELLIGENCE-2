@@ -20,6 +20,7 @@ public class Solution {
         oldGeneration.fillGenerationRandomly();
 
         Generation nextGeneration = null;
+        boolean stopCriteria = false;
 
         int number = 1;
         do{
@@ -41,10 +42,11 @@ public class Solution {
 
             nextGeneration.getChromosomesOfGeneration().entrySet().forEach(this::calculateFitnessFunctionValues);
 
+            stopCriteria = stopCriteriaCalculation(oldGeneration,nextGeneration);
             oldGeneration.setChromosomesOfGeneration(nextGeneration.getChromosomesOfGeneration());
 
             nextGeneration.printTheBestChromosome(number);
-        }while (!stopCriteriaCalculation(oldGeneration,nextGeneration));
+        }while (!stopCriteria);
         endTime = System.nanoTime();
 
         generationCount = number;

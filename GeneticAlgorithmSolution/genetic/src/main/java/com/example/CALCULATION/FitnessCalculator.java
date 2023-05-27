@@ -6,7 +6,7 @@ public class FitnessCalculator {
     public static int fitnessValueCalculation(int[] geneValues){
         int totalWeight = 0;
         int totalValue = 0 ;
-        for (int x = 0; x < geneValues.length && totalWeight < DataSet.getKnapsackWeight() ; x++){
+        for (int x = 0; x < geneValues.length; x++){
             if(geneValues[x] == 1){
                 totalValue+= DataSet.getValues().get(x);
                 totalWeight+= DataSet.getWeights().get(x);

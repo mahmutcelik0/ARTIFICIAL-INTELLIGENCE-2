@@ -15,6 +15,7 @@ dictionary = {
 }
 
 
+
 def fill_the_dictionary(hardness_level):
     match hardness_level:
         case 1:
@@ -32,7 +33,7 @@ def fill_the_dictionary(hardness_level):
         for line in file:
             dictionary["weights"].append(int(line.strip().split("\n")[0]))
 
-    with open(os.path.join(dictionary["path"], dictionary["value_filename"]), "r") as file:
+    with open(os.path.join(dictionary["path"], dictionary["knapsack_filename"]), "r") as file:
         dictionary["knapsack_weight"] = int(file.read().strip().split("\n")[0])
 
 
@@ -46,7 +47,7 @@ def special_dataset_for_plot(number):
         for line in file:
             dictionary["weights"].append(int(line.strip().split("\n")[0]))
 
-    with open(os.path.join(dictionary["path"], dictionary["value_filename"]), "r") as file:
+    with open(os.path.join(dictionary["path"], dictionary["knapsack_filename"]), "r") as file:
         dictionary["knapsack_weight"] = int(file.read().strip().split("\n")[0])
 
 
@@ -99,7 +100,14 @@ def main():
     # In python the max recursion limit is 1000 and the hardness level of 3 exceeds it.
     # sys.setrecursionlimit(10000) but It couldn't solve it still
 
-    draw_timecomplexity_plot()
+    # draw_timecomplexity_plot()
 
+    special_dataset_for_plot(8)
+    # print(dictionary["values"])
+    # print(dictionary["weights"])
+    # print(dictionary["knapsack_weight"])
+    # print(solve_knapsack(dictionary["values"], dictionary["weights"], dictionary["knapsack_weight"]))
+
+    print(sum(dictionary["weights"]))
 
 main()
