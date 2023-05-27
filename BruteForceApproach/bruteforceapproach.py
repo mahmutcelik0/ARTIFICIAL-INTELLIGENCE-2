@@ -100,14 +100,13 @@ def main():
     # In python the max recursion limit is 1000 and the hardness level of 3 exceeds it.
     # sys.setrecursionlimit(10000) but It couldn't solve it still
 
-    # draw_timecomplexity_plot()
+    draw_timecomplexity_plot()
 
-    special_dataset_for_plot(8)
+    # special_dataset_for_plot(8)
     # print(dictionary["values"])
     # print(dictionary["weights"])
     # print(dictionary["knapsack_weight"])
     # print(solve_knapsack(dictionary["values"], dictionary["weights"], dictionary["knapsack_weight"]))
 
-    print(sum(dictionary["weights"]))
 
 main()
