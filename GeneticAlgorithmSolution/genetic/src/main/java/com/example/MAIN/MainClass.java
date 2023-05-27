@@ -6,6 +6,8 @@ import com.example.CONSTANT.DataSet;
 public class MainClass {
     public static void main(String[] args) throws CloneNotSupportedException {
         DataSet.fillData(1); // DON'T REMOVE IT
+        Solution solution = new Solution();
+        solution.solve();
 //        int[] myArray = {0,0,0,1,1,0,0,0,0,0};
 //        System.out.println(FitnessCalculator.fitnessValueCalculation(myArray));
 
@@ -74,10 +76,21 @@ public class MainClass {
 //        generation.printTheWorstChromosome(1);
 
         //PRINT MEAN CONTROL
-        Generation generation = new Generation();
-        generation.fillGenerationRandomly();
-        generation.printGeneration();
-        generation.meanOfFitnessValues(1);
+//        Generation generation = new Generation();
+//        generation.fillGenerationRandomly();
+//        generation.printGeneration();
+//        generation.meanOfFitnessValues(1);
+
+        //MUTATION CONTROL AGAIN
+//        Generation generation = new Generation();
+//        generation.fillGenerationRandomly();
+//        System.out.println("BEFORE GENERATION");
+//        generation.printGeneration();
+//        System.out.println("MUTATION");
+//        generation.mutation();
+//        generation.updateGenerationsFitnessValues();
+//        System.out.println("AFTER GENERATION");
+//        generation.printGeneration();
 
 
     }

@@ -4,6 +4,7 @@ import com.example.CALCULATION.FitnessCalculator;
 import com.example.CONSTANT.Constants;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Generation {
@@ -32,9 +33,9 @@ public class Generation {
 
     //TOURNAMENT SELECTION WAY
     //https://en.wikipedia.org/wiki/Tournament_selection
-    public List<Map.Entry<Chromosome, Integer>> tournamentSelection() {
+    public List<Chromosome> tournamentSelection() {
         Map<Chromosome, Integer> copyOfCurrentGeneration = new HashMap<>(chromosomesOfGeneration);
-        List<Map.Entry<Chromosome, Integer>> returnList = new ArrayList<>();
+        List<Chromosome> returnList = new ArrayList<>();
         for (int x = 0; x < 2 && returnList.size() <= 2; x++) {
             int firstRandomNumber = random.nextInt(0, copyOfCurrentGeneration.size());
             int secondRandomNumber = random.nextInt(0, copyOfCurrentGeneration.size());
@@ -51,15 +52,15 @@ public class Generation {
             Map.Entry<Chromosome, Integer> secondPlayer = copyOfCurrentGeneration.entrySet().stream().filter(e -> finalSecondRandomNumber == temp.getAndIncrement()).toList().get(0);
 
             if (firstPlayer.getValue() > secondPlayer.getValue()) {
-                returnList.add(firstPlayer);
+                returnList.add(firstPlayer.getKey());
             } else if (firstPlayer.getValue() < secondPlayer.getValue()) {
-                returnList.add(secondPlayer);
+                returnList.add(secondPlayer.getKey());
             } else {
                 if (returnList.size() == 1) {
-                    returnList.add(firstPlayer);
+                    returnList.add(firstPlayer.getKey());
                 } else {
-                    returnList.add(firstPlayer);
-                    returnList.add(secondPlayer);
+                    returnList.add(firstPlayer.getKey());
+                    returnList.add(secondPlayer.getKey());
                 }
                 x = 2;
             }
@@ -109,6 +110,26 @@ public class Generation {
      * [1, 0, 0, 1, 0, 1, 0, 0, 1, 1]
      * FITNESS FUNCTION - 83
      * */
+
+    public void mutation(){
+        AtomicBoolean firstElement = new AtomicBoolean(true);
+        chromosomesOfGeneration.entrySet().stream().sorted(Map.Entry.<Chromosome,Integer>comparingByValue().reversed()).forEach(e->{
+            if(firstElement.get()) {
+                try {
+                    e.getKey().printChromosomeGenes();
+                    System.out.println(e.getValue());
+                    twoOptMutation(e.getKey());
+                    firstElement.set(false);
+                } catch (CloneNotSupportedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }else{
+                normalMutation(e.getKey());
+            }
+        });
+    }
+
+
     public void twoOptMutation(Chromosome chromosome) throws CloneNotSupportedException {
         Chromosome mutatedChromosome = chromosome;
         Chromosome bestMutated = (Chromosome) mutatedChromosome.clone();
@@ -217,6 +238,10 @@ public class Generation {
             chromosome.getKey().printChromosomeGenes();
             System.out.println(chromosome.getValue());
         }
+    }
+
+    public void updateGenerationsFitnessValues(){
+        chromosomesOfGeneration.entrySet().forEach(e -> e.setValue(FitnessCalculator.fitnessValueCalculation(e.getKey().getGeneOfChromosome())));
     }
 
     public Map<Chromosome, Integer> getChromosomesOfGeneration() {

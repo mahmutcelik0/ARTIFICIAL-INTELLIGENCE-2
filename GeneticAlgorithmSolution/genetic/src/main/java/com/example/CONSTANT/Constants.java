@@ -5,7 +5,8 @@ public enum Constants {
     CHROMOSOMECOUNT(20),
     ELITCHROMOCOUNT(2),
     ELITISMPERCENT(100),
-    MUTATIONPERCENT(100);
+    MUTATIONPERCENT(100),
+    STOPCOUNT(50);
 
 
     private final int number;
