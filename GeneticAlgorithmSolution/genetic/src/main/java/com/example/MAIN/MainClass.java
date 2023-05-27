@@ -1,9 +1,10 @@
 package com.example.MAIN;
 
+import com.example.CALCULATION.FitnessCalculator;
 import com.example.CONSTANT.DataSet;
 
 public class MainClass {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
         DataSet.fillData(1); // DON'T REMOVE IT
 //        int[] myArray = {0,0,0,1,1,0,0,0,0,0};
 //        System.out.println(FitnessCalculator.fitnessValueCalculation(myArray));
@@ -11,10 +12,10 @@ public class MainClass {
 //        Chromosome chromosome = new Chromosome();
 //        chromosome.printChromosomeGenes();
 
-        Generation generation = new Generation();
-        generation.fillGenerationRandomly();
-        generation.printGeneration();
-        System.out.println("----------------------");
+//        Generation generation = new Generation();
+//        generation.fillGenerationRandomly();
+//        generation.printGeneration();
+//        System.out.println("----------------------");
 
         //ELITISM CONTROl
         //Generation nextGeneration = new Generation();
@@ -22,10 +23,43 @@ public class MainClass {
         //nextGeneration.printGeneration();
 
         //SELECTION CONTROL
-        generation.tournamentSelection().forEach(e -> {
-            e.getKey().printChromosomeGenes();
-            System.out.println(e.getValue());
-        });
+//        generation.tournamentSelection().forEach(e -> {
+//            e.getKey().printChromosomeGenes();
+//            System.out.println(e.getValue());
+//        });
+//
+
+
+        //CROSSOVER CONTROL
+//        Chromosome chr1 = new Chromosome();
+//        Chromosome chr2 = new Chromosome();
+//        System.out.println("BEFORE");
+//        chr1.printChromosomeGenes();
+//        chr2.printChromosomeGenes();
+//        System.out.println("--------------------------------\nAFTER");
+//        Generation secondGeneration = new Generation();
+//        secondGeneration.crossOverTwoChromosome(chr1,chr2).forEach(Chromosome::printChromosomeGenes);
+
+        //TWO OPT MUTATION CONTROL
+//        Chromosome chr1 = new Chromosome();
+//        System.out.println("BEFORE");
+//        chr1.printChromosomeGenes();
+//        System.out.println("FITNESS FUNCTION - "+ FitnessCalculator.fitnessValueCalculation(chr1.getGeneOfChromosome()));
+//        Generation generation = new Generation();
+//        generation.twoOptMutation(chr1);
+//        System.out.println("AFTER");
+//        chr1.printChromosomeGenes();
+//        System.out.println("FITNESS FUNCTION - "+ FitnessCalculator.fitnessValueCalculation(chr1.getGeneOfChromosome()));
+
+        //MUTATION CONTROL
+//        Chromosome chr1 = new Chromosome();
+//        System.out.println("BEFORE");
+//        chr1.printChromosomeGenes();
+//        Generation generation = new Generation();
+//        System.out.println("EXECUTION");
+//        generation.normalMutation(chr1);
+//        System.out.println("AFTER");
+//        chr1.printChromosomeGenes();
 
 
     }
