@@ -2,23 +2,12 @@ package com.example.MAIN;
 
 import com.example.CALCULATION.FitnessCalculator;
 import com.example.CONSTANT.DataSet;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.annotations.XYTextAnnotation;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
 public class MainClass {
     public static void main(String[] args) throws CloneNotSupportedException {
-//        DataSet.fillData(2); // DON'T REMOVE IT
-//        Solution solution = new Solution();
-//        solution.solve();
+        DataSet.fillData(3); // DON'T REMOVE IT
+        Solution solution = new Solution();
+        solution.solve();
 //        int[] myArray = {0,0,0,1,1,0,0,0,0,0};
 //        System.out.println(FitnessCalculator.fitnessValueCalculation(myArray));
 
@@ -108,65 +97,5 @@ public class MainClass {
 }
 
 
-class GeneticAlgorithmGraph {
 
-    public static void main(String[] args) {
-        // Create sample data for generation values and generation counts
-        double[] bestValues = {10, 20, 30, 40, 50};
-        double[] averageValues = {15, 25, 35, 45, 55};
-        int[] generationCounts = {1, 2, 3, 4, 5};
-
-        // Create the dataset
-        XYDataset dataset = createDataset(generationCounts, bestValues, averageValues);
-
-        // Create the chart
-        JFreeChart chart = createChart(dataset);
-
-        // Display the chart in a frame
-        ChartFrame frame = new ChartFrame("Genetic Algorithm", chart);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    private static XYDataset createDataset(int[] generationCounts, double[] bestValues, double[] averageValues) {
-        XYSeries bestSeries = new XYSeries("Best Values");
-        XYSeries averageSeries = new XYSeries("Average Values");
-
-        // Add data points to the series
-        for (int i = 0; i < bestValues.length; i++) {
-            bestSeries.add(generationCounts[i], bestValues[i]);
-            averageSeries.add(generationCounts[i], averageValues[i]);
-        }
-
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(bestSeries);
-        dataset.addSeries(averageSeries);
-
-        return dataset;
-    }
-
-    private static JFreeChart createChart(XYDataset dataset) {
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                "Genetic Algorithm",     // Chart title
-                "Generation Count",      // X-axis label
-                "Generation Value",      // Y-axis label
-                dataset,                 // Dataset
-                PlotOrientation.VERTICAL,
-                true,                    // Show legend
-                true,                    // Use tooltips
-                false                    // Generate URLs
-        );
-
-        XYPlot plot = chart.getXYPlot();
-        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-        renderer.setSeriesShapesVisible(0, true);
-        renderer.setSeriesShapesVisible(1, true);
-        plot.setRenderer(renderer);
-
-        NumberAxis xAxis = (NumberAxis) plot.getDomainAxis();
-        xAxis.setAutoRangeIncludesZero(false);
-
-        return chart;
-    }
-}
 

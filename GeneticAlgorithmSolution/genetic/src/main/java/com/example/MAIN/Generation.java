@@ -218,6 +218,11 @@ public class Generation {
         System.out.print("\t VALUE:"+maxEntry.getValue()+"\n");
     }
 
+    public Double calculateTheBestChromosome(){
+        Map.Entry<Chromosome, Integer> maxEntry =  Collections.max(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
+        return (double) maxEntry.getValue();
+    }
+
     public void printTheWorstChromosome(int number){
         Map.Entry<Chromosome, Integer> minEntry =  Collections.min(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
         System.out.print(number+". GENERATION'S BEST:\t");
@@ -229,13 +234,13 @@ public class Generation {
      * SUM OF GENERATION FITNESS FUNCTION VALUES: 318
      * 1. GENERATION'S MEAN OF FITNESS VALUES: 15.9
      * */
-    public void meanOfFitnessValues(int number){
+    public Double meanOfFitnessValues(){
         AtomicInteger sum = new AtomicInteger();
         chromosomesOfGeneration.values().forEach(sum::addAndGet);
-        System.out.println("SUM OF GENERATION FITNESS FUNCTION VALUES: "+ sum);
-        double mean =  sum.get() / (double) Constants.CHROMOSOMECOUNT.getNumber();
-        System.out.println(number + ". GENERATION'S MEAN OF FITNESS VALUES: "+ mean);
+        return sum.get() / (double) Constants.CHROMOSOMECOUNT.getNumber();
     }
+
+
 
 
     public void printGeneration() {

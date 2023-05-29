@@ -2,6 +2,7 @@ package com.example.MAIN;
 
 import com.example.CALCULATION.FitnessCalculator;
 import com.example.CONSTANT.Constants;
+import com.example.PLOTTING.AverageAndBestPlot;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +13,8 @@ public class Solution {
     private double startTime = 0;
     private double endTime = 0;
     private int generationCount = 0;
+
+    private static AverageAndBestPlot plot = new AverageAndBestPlot();
 
     public void solve() throws CloneNotSupportedException {
         startTime = System.nanoTime();
@@ -43,6 +46,9 @@ public class Solution {
             nextGeneration.getChromosomesOfGeneration().entrySet().forEach(this::calculateFitnessFunctionValues);
 
             stopCriteria = stopCriteriaCalculation(oldGeneration,nextGeneration);
+
+            plot.addAllData(oldGeneration.calculateTheBestChromosome(), oldGeneration.meanOfFitnessValues(), number);
+
             oldGeneration.setChromosomesOfGeneration(nextGeneration.getChromosomesOfGeneration());
 
             nextGeneration.printTheBestChromosome(number);
@@ -52,6 +58,8 @@ public class Solution {
         generationCount = number;
 
         System.out.println("FINAL EXECUTED TOUR: "+ number);
+
+        plot.drawTheChart();
     }
 
     //Fitness function değerlerinin güncellenmesini sağlayan metod
