@@ -12,7 +12,7 @@ values = {
     "weight_file": "weight_file.txt",
     "value_file": "value_file.txt",
     "knapsack_file": "knapsack_file.txt",
-    "loop_count":10000
+    "loop_count": 10000
 }
 
 
@@ -62,18 +62,18 @@ def generate_random_knapsack_weight_file():
 # METHOD OVERLOADING
 def generate_random_value_and_weight_files_overload(loop_number):
     # CREATION OF WEIGHTS
-    with open(file_in_path(values["weight_file"]+"_"+str(loop_number)), "w") as file:
+    with open(file_in_path(values["weight_file"] + "_" + str(loop_number)), "w") as file:
         for x in range(values["dataset_length"]):
             file.write(str(generate_random_number(values["min_value_of_weight"], values["max_value_of_weight"])) + "\n")
 
     # CREATION OF VALUES
-    with open(file_in_path(values["value_file"]+"_"+str(loop_number)), "w") as file:
+    with open(file_in_path(values["value_file"] + "_" + str(loop_number)), "w") as file:
         for x in range(values["dataset_length"]):
             file.write(str(generate_random_number(values["min_value_of_weight"], values["max_value_of_weight"])) + "\n")
 
 
 def generate_random_knapsack_weight_file_overload(loop_number):
-    with open(file_in_path(values["knapsack_file"]+"_"+str(loop_number)), "w") as file:
+    with open(file_in_path(values["knapsack_file"] + "_" + str(loop_number)), "w") as file:
         file.write(str(generate_random_number(values["min_value_of_knapsack_weight"],
                                               values["max_value_of_knapsack_weight"])) + "\n")
 
