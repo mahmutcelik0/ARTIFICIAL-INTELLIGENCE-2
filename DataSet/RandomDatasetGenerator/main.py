@@ -1,6 +1,8 @@
 import random
 import os
 
+#DON'T USE THIS CLASS
+
 values = {
     "hardness_level": 4,
     "min_value_of_weight": 1,
