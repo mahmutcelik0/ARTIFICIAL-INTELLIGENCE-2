@@ -4,25 +4,81 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1fb11801-93a8-4380-ba18-1eb67d6b646c" name="Changes" comment="" />
+    <list default="true" id="1fb11801-93a8-4380-ba18-1eb67d6b646c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/BruteForceApproach/bruteforceapproach.py" beforeDir="false" afterPath="$PROJECT_DIR$/BruteForceApproach/bruteforceapproach.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DataSet/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/2-Medium/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/2-Medium/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/2-Medium/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/3-Hard/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/3-Hard/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/3-Hard/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/1/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/1/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/1/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/10/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/10/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/10/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/11/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/11/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/11/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/12/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/12/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/12/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/2/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/2/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/2/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/3/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/3/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/3/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/4/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/4/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/4/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/5/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/5/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/5/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/6/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/6/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/6/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/7/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/7/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/7/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/8/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/8/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/8/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/9/knapsack_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/9/value_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/DifferentDataSetsForPlots/9/weight_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/EXAMPLE_DATASET/0000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSet/RandomDatasetGenerator/in_onefile_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataSet/RandomDatasetGenerator/in_onefile_generator.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2QJtKZT3fHu2lvn8wZVLzYIf6gw" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/mahmu/Desktop/DERSLER-3-2/YAPAY ZEKA/PROJECT-2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="bruteforceapproach" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="PROJECT-2" />
@@ -57,6 +113,7 @@
       <updated>1685083448977</updated>
       <workItem from="1685083458944" duration="1331000" />
       <workItem from="1685086157858" duration="231000" />
+      <workItem from="1685561140630" duration="1559000" />
     </task>
     <servers />
   </component>
@@ -65,6 +122,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PROJECT_2$main.coverage" NAME="bruteforceapproach Coverage Results" MODIFIED="1685083697343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/PROJECT_2$bruteforceapproach.coverage" NAME="bruteforceapproach Coverage Results" MODIFIED="1685083724942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BruteForceApproach" />
+    <SUITE FILE_PATH="coverage/PROJECT_2$bruteforceapproach.coverage" NAME="bruteforceapproach Coverage Results" MODIFIED="1685562701846" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BruteForceApproach" />
+    <SUITE FILE_PATH="coverage/PROJECT_2$in_onefile_generator.coverage" NAME="in_onefile_generator Coverage Results" MODIFIED="1685562600331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DataSet/RandomDatasetGenerator" />
   </component>
 </project>

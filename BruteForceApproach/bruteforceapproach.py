@@ -1,5 +1,4 @@
 import os.path
-import sys
 import time
 
 import matplotlib.pyplot as plt
@@ -8,33 +7,29 @@ dictionary = {
     "values": [],
     "weights": [],
     "knapsack_weight": 0,
-    "path": os.path.join("../DataSet", "1-Easy"),
-    "value_filename": "value_file.txt",
-    "weight_filename": "weight_file.txt",
-    "knapsack_filename": "knapsack_file.txt"
+    "path": "",
 }
 
 
+def fill_the_dictionary(file_name, dataset_number):
+    dictionary["path"] = os.path.join("../DataSet/EXAMPLE_DATASET/", file_name)
 
-def fill_the_dictionary(hardness_level):
-    match hardness_level:
-        case 1:
-            dictionary["path"] = os.path.join("../DataSet", "1-Easy")
-        case 2:
-            dictionary["path"] = os.path.join("../DataSet", "2-Medium")
-        case 3:
-            dictionary["path"] = os.path.join("../DataSet", "3-Hard")
+    with open(dictionary["path"], "r") as file:
 
-    with open(os.path.join(dictionary["path"], dictionary["value_filename"]), "r") as file:
+        number = 0
         for line in file:
-            dictionary["values"].append(int(line.strip().split("\n")[0]))
-
-    with open(os.path.join(dictionary["path"], dictionary["weight_filename"]), "r") as file:
-        for line in file:
-            dictionary["weights"].append(int(line.strip().split("\n")[0]))
-
-    with open(os.path.join(dictionary["path"], dictionary["knapsack_filename"]), "r") as file:
-        dictionary["knapsack_weight"] = int(file.read().strip().split("\n")[0])
+            if int(number / 3) == dataset_number:
+                for a in line.strip().split(" "):
+                    match number % 3:
+                        case 0:
+                            dictionary["values"].append(int(a))
+                        case 1:
+                            dictionary["weights"].append(int(a))
+                        case 2:
+                            dictionary["knapsack_weight"] = int(a)
+                number = number + 1
+            else:
+                number = number + 1
 
 
 def special_dataset_for_plot(number):
@@ -73,13 +68,14 @@ def knapsack_recursive(profits, weights, capacity, currentIndex):
     return max(profit1, profit2)
 
 
-def draw_timecomplexity_plot():
+def draw_timecomplexity_plot(filename, number):
     execution_timeof_dataset = []
     dataset_length = []
 
-    for x in range(1, 8):
+    for x in range(number + 1):
         start_time = time.time()
-        special_dataset_for_plot(x)
+        fill_the_dictionary(filename, x)
+        print(dictionary)
         solve_knapsack(dictionary["values"], dictionary["weights"], dictionary["knapsack_weight"])
         end_time = time.time()
         execution_timeof_dataset.append(end_time - start_time)
@@ -100,13 +96,7 @@ def main():
     # In python the max recursion limit is 1000 and the hardness level of 3 exceeds it.
     # sys.setrecursionlimit(10000) but It couldn't solve it still
 
-    draw_timecomplexity_plot()
-
-    # special_dataset_for_plot(8)
-    # print(dictionary["values"])
-    # print(dictionary["weights"])
-    # print(dictionary["knapsack_weight"])
-    # print(solve_knapsack(dictionary["values"], dictionary["weights"], dictionary["knapsack_weight"]))
+    draw_timecomplexity_plot("dataset_file_2.txt", 9)
 
 
 main()
