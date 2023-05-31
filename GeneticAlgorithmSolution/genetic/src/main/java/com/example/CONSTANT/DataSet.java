@@ -2,6 +2,7 @@ package com.example.CONSTANT;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,43 +11,38 @@ public class DataSet {
     private static List<Integer> weights = new ArrayList<>();
     private static Integer knapsackWeight = 0;
 
-    public static void fillData(Integer dataSetHardness) {
-        String rootPath = "src\\main\\java\\DifferentDataSetsForPlots\\" + dataSetHardness.toString();
-        String valueFilePath = rootPath + "\\value_file.txt";
-        String weightFilePath = rootPath + "\\weight_file.txt";
-        String knapsackWeightPath = rootPath + "\\knapsack_file.txt";
+    //DATA SETLER ICERISINDE BIRDEN FAZLA DATA SERISI OLACAK VERILEN SAYIYA GORE DATASETTEN ILGILI GRUP DOLDURULACAK - 0 dan başlayacak grup
+
+    public static void fillData(String dataSetName, Integer whichDataSet) {
+        String rootPath = "src\\main\\java\\DATASETS\\" + dataSetName+".txt";
 
         try {
-            for (int x = 0; x < 3; x++) {
-                File file;
-                Scanner reader;
-                switch (x) {
-                    case 0 -> {
-                        file = new File(valueFilePath);
-                        reader = new Scanner(file);
-                        while (reader.hasNextLine()) {
-                            int nextValue = Integer.parseInt(reader.nextLine());
-                            values.add(nextValue);
-                        }
-                    }
-                    case 1 -> {
-                        file = new File(weightFilePath);
-                        reader = new Scanner(file);
-                        while (reader.hasNextLine()) {
-                            int nextValue = Integer.parseInt(reader.nextLine());
-                            weights.add(nextValue);
-                        }
-                    }
-                    case 2 -> {
-                        file = new File(knapsackWeightPath);
-                        reader = new Scanner(file);
-                        int nextValue = Integer.parseInt(reader.nextLine());
-                        setKnapsackWeight(nextValue);
+            File file = new File(rootPath);
+            Scanner reader = new Scanner(file);
+            for(int x = 0 ; x < whichDataSet ; x++){
+                for(int y = 0 ; y < 3 ; y++){
+                    if(reader.hasNextLine()){
+                        reader.nextLine();
                     }
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+            for(int a = 0 ; a < 3 ; a++){
+                if(reader.hasNextLine()){
+                    List<Integer> data = Arrays
+                                        .stream(reader.nextLine().split(" "))
+                                        .map(Integer::parseInt)
+                                        .toList();
+                    switch (a) {
+                        case 0 -> values.addAll(data);
+                        case 1 -> weights.addAll(data);
+                        case 2 -> knapsackWeight = data.get(0);
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+            throw new RuntimeException("ENTER THE CORRECT NUMBER IN MAINCLASS"+e);
         }
     }
 
