@@ -1,5 +1,6 @@
 import os.path
 import time
+import sys
 
 import matplotlib.pyplot as plt
 
@@ -76,27 +77,28 @@ def draw_timecomplexity_plot(filename, number):
         start_time = time.time()
         fill_the_dictionary(filename, x)
         print(dictionary)
+        dataset_length.append(len(dictionary["values"]))
         solve_knapsack(dictionary["values"], dictionary["weights"], dictionary["knapsack_weight"])
         end_time = time.time()
         execution_timeof_dataset.append(end_time - start_time)
-        dataset_length.append(len(dictionary["values"]))
         print(len(dictionary["values"]))
 
         dictionary["values"].clear()
         dictionary["weights"].clear()
+        dictionary["knapsack_weight"] = 0
 
     plt.plot(dataset_length, execution_timeof_dataset, marker='o')
     plt.xlabel('Input Size')
     plt.ylabel('Execution Time')
-    plt.title('10 Different Data Set\nKnapsack Algorithm Time Complexity in BruteForce Approach')
+    plt.title('Knapsack Algorithm Time Complexity in BruteForce Approach')
     plt.show()
 
 
 def main():
     # In python the max recursion limit is 1000 and the hardness level of 3 exceeds it.
-    # sys.setrecursionlimit(10000) but It couldn't solve it still
+    # sys.setrecursionlimit(2 ^ 100)  # but It couldn't solve it still
 
-    draw_timecomplexity_plot("dataset_file_2.txt", 9)
+    draw_timecomplexity_plot("dataset_file_3.txt", 20)
 
 
 main()

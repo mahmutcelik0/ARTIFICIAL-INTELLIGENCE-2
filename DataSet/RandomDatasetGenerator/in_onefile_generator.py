@@ -6,10 +6,10 @@ values = {
     "max_value_of_weight": 20,
     "min_value_of_knapsack_weight": 10,
     "max_value_of_knapsack_weight": 200,
-    "dataset_length": 10,
+    "dataset_length": 30,
     "path_of_folder": os.path.join("..", "EXAMPLE_DATASET"),  # CHANGE
     "dataset_file": "dataset_file_2.txt",
-    "loop_count": 10
+    "loop_count": 1
 }
 
 
