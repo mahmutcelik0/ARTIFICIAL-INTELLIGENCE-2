@@ -1,5 +1,6 @@
 package com.example.CONSTANT;
 
+//Projede kullanılan sabitler
 public enum Constants {
     LENGTHOFDATASET(DataSet.getWeights().size()),
     CHROMOSOMECOUNT(20),

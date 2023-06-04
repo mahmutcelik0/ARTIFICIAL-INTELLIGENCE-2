@@ -65,6 +65,7 @@ def draw_timecomplexity_plot(filename, number):
 
         dictionary["values"].clear()
         dictionary["weights"].clear()
+        dictionary["knapsack_weight"] = 0
 
     plt.plot(dataset_length, execution_timeof_dataset, marker='o')
     plt.xlabel('Input Size')
@@ -74,7 +75,7 @@ def draw_timecomplexity_plot(filename, number):
 
 
 def main():
-    draw_timecomplexity_plot("dataset_file_2.txt", 9)
-    draw_timecomplexity_plot("dataset_file.txt", 999)
+    draw_timecomplexity_plot("dynamic_dataset.txt", 9)
+
 
 main()

@@ -6,10 +6,10 @@ values = {
     "max_value_of_weight": 20,
     "min_value_of_knapsack_weight": 10,
     "max_value_of_knapsack_weight": 200,
-    "dataset_length": 30,
+    "dataset_length": 100000,
     "path_of_folder": os.path.join("..", "EXAMPLE_DATASET"),  # CHANGE
     "dataset_file": "dataset_file_2.txt",
-    "loop_count": 1
+    "loop_count": 10
 }
 
 
@@ -38,6 +38,8 @@ def generate_random_value_and_weight_files():
 
             file.write(str(generate_random_number(values["min_value_of_knapsack_weight"],
                                                   values["max_value_of_knapsack_weight"])) + "\n")
+
+            values["dataset_length"] = values["dataset_length"]+1
 
 
 def main():

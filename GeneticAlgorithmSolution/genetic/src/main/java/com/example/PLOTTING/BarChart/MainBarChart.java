@@ -18,12 +18,15 @@ public class MainBarChart{
     }
     // RESULT - TIME tarzında saklanacak elde edilen sonuçlar.
     // Bunları okuyup chart çeşitine göre dolduracağız
+    // 2 çeşit chart çizdiriliyor. Birincisi sonuçlarla result lar ikincisinde execution timelarla ilgili çizilir
     public static void readAndFillTheBarChartValues(){
         DrawBarChart resultBarChart = new DrawBarChart("RESULT");
         DrawBarChart executionTimeBarChart = new DrawBarChart("EXECUTION TIME");
 
+        //Result path ine erişim
         String path = "src\\main\\java\\RESULTS\\";
 
+        //Dosyaların pathleri buradan ilgili yöntemlerin çözümlerini okuyoruz
         List<String> filePaths = new ArrayList<>(
                 Arrays.asList(
                         path+"\\bruteforce_approach_results.txt",
@@ -33,6 +36,7 @@ public class MainBarChart{
                 )
         );
 
+        //Her dosyadan veriler okunur ve ilgili kategorideki data kısmına eklenir
         filePaths.forEach(e->{
             File file = new File(e);
             try {

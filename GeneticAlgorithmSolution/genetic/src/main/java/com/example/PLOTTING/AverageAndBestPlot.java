@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AverageAndBestPlot {
+    //Her generation sonuçları saklanır ve döngü durduğunda çizim gerçekleşir
     private List<Double> bestValuesOfGenerations;
     private List<Double> averageValuesOfGenerations;
     private List<Integer> generationCountList;
@@ -24,13 +25,13 @@ public class AverageAndBestPlot {
         this.averageValuesOfGenerations = new ArrayList<>();
         this.generationCountList = new ArrayList<>();
     }
-
+    //Data nın eklenmesini yapar
     public void addAllData(Double bestValue, Double avgValue, Integer generationCount){
         addBestValue(bestValue);
         addAverageValue(avgValue);
         addGenerationCount(generationCount);
     }
-
+    //Chart ı çizdirmeyi sağlar. Elimizdeki verileri XY dataset ine çeviririz ve JFreeChart ile çizimi yaparız
     public void drawTheChart(){
         XYDataset xyDataset = creationOfXYDataSet();
         JFreeChart chart = creationOfChart(xyDataset);
@@ -40,6 +41,7 @@ public class AverageAndBestPlot {
         chartFrame.setVisible(true);
     }
 
+    //Skladığımız verilerin XYDataset ine çevirir
     private XYDataset creationOfXYDataSet(){
         XYSeries bestValueSeries = new XYSeries("Best Values");
         XYSeries averageValueSeries = new XYSeries("Average Values");
@@ -56,6 +58,7 @@ public class AverageAndBestPlot {
         return xydataset;
     }
 
+    //Chart ın çizdirilmesi
     private JFreeChart creationOfChart(XYDataset xyDataset){
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Genetic Algorithm",     // Chart title
@@ -80,6 +83,7 @@ public class AverageAndBestPlot {
         return chart;
     }
 
+    //Data ların eklenmesi
     private void addBestValue(Double bestValue){
         bestValuesOfGenerations.add(bestValue);
     }

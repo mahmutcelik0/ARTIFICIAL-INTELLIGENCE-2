@@ -9,13 +9,24 @@ import java.util.List;
 import java.util.Map;
 
 public class Solution {
-    private int repeatedSameTimeCount = 0; // Generation da iyileşme olmadığında
+    private int repeatedSameTimeCount = 0; // Generation da iyileşme olmadığında artar
     private double startTime = 0;
     private double endTime = 0;
     private int generationCount = 0;
 
     private static AverageAndBestPlot plot = new AverageAndBestPlot();
 
+    /**
+     * Yapılan adımlar:
+     * 1- İlk generation un random şekilde oluşturulması
+     * 2- Yeni generation a eklenmesi için önceki generation dan elitism ile chromosome seçilmesi (Şans faktörü de bulunmakta)
+     * 3- Selection yapılması - Tournament selection yöntemi kullanıldı
+     * 4- Seçilen kromozomların crossover a uğrayıp yeni generation a eklenmesi
+     * 5- Mutasyon yapılması - 2 yöntem bulunuyor. Two opt mutation ve normal mutation (Şans faktörü bulunmakta)
+     * 6- Yeni generationdaki chromosome ların fitness değerlerinin hesaplanması
+     * 7- Stop criteria kontrolü - Belirli generation da sonuçlarda iyileşme olmazsa döngü durar
+     * 8- Elde edilen verilerle grafiklerin çizdirilmesi
+     * */
     public void solve() throws CloneNotSupportedException {
         startTime = System.nanoTime();
 
@@ -68,6 +79,7 @@ public class Solution {
         entry.setValue(FitnessCalculator.fitnessValueCalculation(entry.getKey().getGeneOfChromosome()));
     }
 
+    //Durma kontrolünün yapıldığı yer
     public boolean stopCriteriaCalculation(Generation oldGeneration, Generation newGeneration){
         int oldGenerationBest = Collections.max(oldGeneration.getChromosomesOfGeneration().entrySet(),Map.Entry.comparingByValue()).getValue();
         int newGenerationBest = Collections.max(newGeneration.getChromosomesOfGeneration().entrySet(),Map.Entry.comparingByValue()).getValue();
@@ -78,7 +90,7 @@ public class Solution {
             repeatedSameTimeCount = 0;
         }
 
-        return repeatedSameTimeCount == Constants.STOPCOUNT.getNumber(); // 50 defa iyileşmemişse return true olur yani dur, diğer türlü false
+        return repeatedSameTimeCount == Constants.STOPCOUNT.getNumber(); // Belirli tekrarda iyileşmemişse return true olur yani dur, diğer türlü false
     }
 
     public double getStartTime() {

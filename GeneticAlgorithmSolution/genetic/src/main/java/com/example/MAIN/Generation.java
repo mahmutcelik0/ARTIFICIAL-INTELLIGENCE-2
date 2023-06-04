@@ -14,6 +14,7 @@ public class Generation {
     public Generation() {
     }
 
+    //Sabitlerdeki kromozom sayısı kadar rastgele kromozom oluşturulur ve generation a eklenir
     public void fillGenerationRandomly() {
         for (int x = 0; x < Constants.CHROMOSOMECOUNT.getNumber(); x++) {
             Chromosome tempChromosome = new Chromosome();
@@ -21,6 +22,8 @@ public class Generation {
         }
     }
 
+    //Elitism yapılmak isteniyorsa ve şans faktörü başarılı olursa, generation fitness değerlerine göre sıralanır ve kaç tane chromosome
+    //Yeni generation a aktarılacaksa o kadar chromosome aktarılır
     public void makeElitism(Generation nextGeneration) {
         if (Constants.ELITCHROMOCOUNT.getNumber() <= 0) return;
         if (random.nextDouble(0, 100.1) < Constants.ELITISMPERCENT.getNumber()) {
@@ -33,6 +36,12 @@ public class Generation {
 
     //TOURNAMENT SELECTION WAY
     //https://en.wikipedia.org/wiki/Tournament_selection
+    /**
+     * Tournament selection yönteminde generationdan rastgele 2 tane chromsome seçilir ve fitness değerleri karşılaştırılır.
+     * Bunlardan daha yüksek olan kazanmış olur ve yeni generation a aktarılır. 1 tane daha chromosome seçilmesi için tekrardan bu olay gerçekleştirilir.
+     * İkisinin fitness değeri eşitse ikisi de seçilir fakat ilerleyen zamanlarda bunu değiştirmeyi planlamaktayım.
+     * Çözümün başarısını düşürdüğünü düşünüyorum çünkü 0 0 sonuçlarına sahip iki tane chromosome seçilmiş olma oranı ilk başlarda yüksek
+     * */
     public List<Chromosome> tournamentSelection() {
         Map<Chromosome, Integer> copyOfCurrentGeneration = new HashMap<>(chromosomesOfGeneration);
         List<Chromosome> returnList = new ArrayList<>();
@@ -68,9 +77,6 @@ public class Generation {
         return returnList;
     }
 
-    //ROULET WHELL WILL IMPLEMENT SOON...
-
-
     /**
      * 10 DATA SET
      * BEFORE
@@ -90,6 +96,7 @@ public class Generation {
      * [1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0]
      * [1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0]
      * */
+    //Seçilen iki chromosome un ortadan sonraki genlerinin çaprazlamasını yapar
     public List<Chromosome> crossOverTwoChromosome(Chromosome firstChromosome, Chromosome secondChromosome){
         int[] firstChromosomeGene = firstChromosome.getGeneOfChromosome().clone();
         firstChromosome.setSecondPart(secondChromosome.getGeneOfChromosome());
@@ -98,7 +105,7 @@ public class Generation {
     }
 
 
-    //MUTATION TECHNIQUES
+    //MUTATION TECHNIQUES - In future of project, we will add new techniques to improve success rate of algorithm
 
 
     //TUM GENLER SIRAYLA YER DEGISTIRIR EN IYISI SECILIR
@@ -111,6 +118,7 @@ public class Generation {
      * FITNESS FUNCTION - 83
      * */
 
+    // İki yöntem bulunuyor. En iyi chromosome two opt mutation yöntemine diğer chromosome lar normal mutation a yollanıyor
     public void mutation(){
         AtomicBoolean firstElement = new AtomicBoolean(true);
         chromosomesOfGeneration.entrySet().stream().sorted(Map.Entry.<Chromosome,Integer>comparingByValue().reversed()).forEach(e->{
@@ -129,7 +137,7 @@ public class Generation {
         });
     }
 
-
+    //Two opt mutation da generation daki en iyi chromosome un genleri birbirleriyle yer değiştirerek mevcuttaki genlerin alabileceği max fitness değeri bulunur
     public void twoOptMutation(Chromosome chromosome) throws CloneNotSupportedException {
         Chromosome mutatedChromosome = chromosome;
         Chromosome bestMutated = (Chromosome) mutatedChromosome.clone();
@@ -193,6 +201,8 @@ public class Generation {
      * AFTER
      * [1, 1, 1, 1, 0, 0, 1, 1, 1, 0]
      * */
+    //Normal mutationda şans faktörü başarılı olursa chromosome daki rastgele bir gen 0 sa 1, 1 se 0 yapılır
+    //Mutasyon sonucunda aşma olmuyorsa set lenir
     public void normalMutation(Chromosome chromosome){
         double randomPercent = random.nextDouble(0,100);
         if(randomPercent < Constants.MUTATIONPERCENT.getNumber()){
@@ -218,11 +228,13 @@ public class Generation {
         System.out.print("\t VALUE:"+maxEntry.getValue()+"\n");
     }
 
+    //Generationdaki en iyi fitness değerine sahip chromosome un bulunması
     public Double calculateTheBestChromosome(){
         Map.Entry<Chromosome, Integer> maxEntry =  Collections.max(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
         return (double) maxEntry.getValue();
     }
 
+    //Maybe will use in future
     public void printTheWorstChromosome(int number){
         Map.Entry<Chromosome, Integer> minEntry =  Collections.min(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
         System.out.print(number+". GENERATION'S BEST:\t");
@@ -234,14 +246,12 @@ public class Generation {
      * SUM OF GENERATION FITNESS FUNCTION VALUES: 318
      * 1. GENERATION'S MEAN OF FITNESS VALUES: 15.9
      * */
+    //Generation un fitness değerlerinin ortalamasını hesaplar
     public Double meanOfFitnessValues(){
         AtomicInteger sum = new AtomicInteger();
         chromosomesOfGeneration.values().forEach(sum::addAndGet);
         return sum.get() / (double) Constants.CHROMOSOMECOUNT.getNumber();
     }
-
-
-
 
     public void printGeneration() {
         for (Map.Entry<Chromosome, Integer> chromosome : chromosomesOfGeneration.entrySet()) {
