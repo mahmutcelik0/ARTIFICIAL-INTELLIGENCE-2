@@ -1,9 +1,9 @@
 import os.path
 import time
-import sys
 
 import matplotlib.pyplot as plt
 
+# Veri seti saklanır
 dictionary = {
     "values": [],
     "weights": [],
@@ -12,6 +12,7 @@ dictionary = {
 }
 
 
+# Veri setini verilen dosya adından ve hangi veri setinin istendiği kullanarak doldurulur
 def fill_the_dictionary(file_name, dataset_number):
     dictionary["path"] = os.path.join("../DataSet/EXAMPLE_DATASET/", file_name)
 
@@ -33,42 +34,31 @@ def fill_the_dictionary(file_name, dataset_number):
                 number = number + 1
 
 
-def special_dataset_for_plot(number):
-    dictionary["path"] = os.path.join("../DataSet/DifferentDataSetsForPlots", str(number))
-    with open(os.path.join(dictionary["path"], dictionary["value_filename"]), "r") as file:
-        for line in file:
-            dictionary["values"].append(int(line.strip().split("\n")[0]))
-
-    with open(os.path.join(dictionary["path"], dictionary["weight_filename"]), "r") as file:
-        for line in file:
-            dictionary["weights"].append(int(line.strip().split("\n")[0]))
-
-    with open(os.path.join(dictionary["path"], dictionary["knapsack_filename"]), "r") as file:
-        dictionary["knapsack_weight"] = int(file.read().strip().split("\n")[0])
-
-
+# Recursive solution u çağırır
 def solve_knapsack(profits, weights, capacity):
     return knapsack_recursive(profits, weights, capacity, 0)
 
 
-def knapsack_recursive(profits, weights, capacity, currentIndex):
-    # base checks
-    if capacity <= 0 or currentIndex >= len(profits):
+def knapsack_recursive(values, weights, capacity, currentIndex):
+    # Base condition
+    if capacity <= 0 or currentIndex >= len(values):
         return 0
 
-    # recursive call after choosing the element at the currentIndex
-    # if the weight of the element at currentIndex exceeds the capacity, we  shouldn't process this
+    # currentIndex'te öğeyi seçtikten sonra recursive call
+    # currentIndex'teki nesnenin weighti çanta ağırlığını aşarsa, bunu çalıştırmayız
     profit1 = 0
     if weights[currentIndex] <= capacity:
-        profit1 = profits[currentIndex] + knapsack_recursive(
-            profits, weights, capacity - weights[currentIndex], currentIndex + 1)
+        profit1 = values[currentIndex] + knapsack_recursive(
+            values, weights, capacity - weights[currentIndex], currentIndex + 1)
 
-    # recursive call after excluding the element at the currentIndex
-    profit2 = knapsack_recursive(profits, weights, capacity, currentIndex + 1)
+    # currentIndex'teki öğeyi hariç tuttuktan sonra recursive call
+    profit2 = knapsack_recursive(values, weights, capacity, currentIndex + 1)
 
+    # İki sonuçtan max olanı return eder
     return max(profit1, profit2)
 
 
+# Number kadar döner yani 20 tane veri seti varsa 20 sini çözer saklar ve en sonda çizer
 def draw_timecomplexity_plot(filename, number):
     execution_timeof_dataset = []
     dataset_length = []

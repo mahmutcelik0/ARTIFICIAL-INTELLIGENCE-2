@@ -1,8 +1,10 @@
 import random
 import os
 
-#DON'T USE THIS CLASS
+# DON'T USE THIS CLASS TO GENERATE RANDOM VALUE
+# Farklı data seti ihtiyaçlarında kullanacağız
 
+# Sabit değerler dictionary den okunuyor
 values = {
     "hardness_level": 4,
     "min_value_of_weight": 1,
@@ -18,6 +20,7 @@ values = {
 }
 
 
+# İstenen düzeye göre oluşturulacak veri zorluğu değişecek
 def set_level_of_hardness():
     match values["hardness_level"]:
         case 1:
@@ -34,15 +37,18 @@ def set_level_of_hardness():
             values["path_of_folder"] = os.path.join("..", "EXAMPLE_DATASET")
 
 
+# Random integer değer oluşturur
 def generate_random_number(start, end):
     return random.randint(start, end)
 
 
+# Folder pathten ilgili filename ile file açılır
 def file_in_path(file):
     new_file = os.path.join(values["path_of_folder"], file)
     return new_file
 
 
+# Dataset ne kadar uzun olacaksa o kadar tekrarda random değer oluşturulup dosyaya yazdırılır
 def generate_random_value_and_weight_files():
     # CREATION OF WEIGHTS
     with open(file_in_path(values["weight_file"]), "w") as file:
@@ -55,6 +61,7 @@ def generate_random_value_and_weight_files():
             file.write(str(generate_random_number(values["min_value_of_weight"], values["max_value_of_weight"])) + "\n")
 
 
+# Random 1 değer oluşturulur ve knapsack ağırlığı olmuş olur
 def generate_random_knapsack_weight_file():
     with open(file_in_path(values["knapsack_file"]), "w") as file:
         file.write(str(generate_random_number(values["min_value_of_knapsack_weight"],
@@ -82,8 +89,6 @@ def generate_random_knapsack_weight_file_overload(loop_number):
 
 def main():
     set_level_of_hardness()
-    # generate_random_value_and_weight_files_overload()
-    # generate_random_knapsack_weight_file_overload()
 
     for x in range(values["loop_count"]):
         generate_random_value_and_weight_files_overload(x)

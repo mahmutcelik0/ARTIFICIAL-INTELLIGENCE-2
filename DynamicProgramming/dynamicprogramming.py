@@ -1,8 +1,9 @@
 import os.path
 import time
 import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
+
+matplotlib.use('TkAgg')
 
 dictionary = {
     "values": [],
@@ -11,6 +12,8 @@ dictionary = {
     "path": "",
 }
 
+
+# Knapsackteki yapıya benzer okuma ve çizdirme bulunuyor. Fark olarak çözüm algoritması var
 def fill_the_dictionary(file_name, dataset_number):
     dictionary["path"] = os.path.join("../DataSet/EXAMPLE_DATASET/", file_name)
 
@@ -33,11 +36,11 @@ def fill_the_dictionary(file_name, dataset_number):
 
 
 def solveKnapsackDynamicProgramming(capacity, weight, values, n):
-    # Build table 2D Matrix
-    # Rows are maximum item number, columns are maximum capacity.
+    # 2 boyutlu array oluşturuluyor
+    # Satırlar maksimum item sayısı, sütunlar maksimum capacity dir.
     K = [[0 for x in range(capacity + 1)] for x in range(n + 1)]
 
-    # Build table K[][] in bottom up manner
+    # 2 Boyutlu array i bottom up yöntemi ile doldurmamızı sağlıyor.
     for i in range(n + 1):
         for w in range(capacity + 1):
             if i == 0 or w == 0:
@@ -49,6 +52,8 @@ def solveKnapsackDynamicProgramming(capacity, weight, values, n):
 
     return K[n][capacity]
 
+
+# İstenen veri seti kadarı çözdürülüyor ve en sonunda çizim gerçekleşiyor
 def draw_timecomplexity_plot(filename, number):
     execution_timeof_dataset = []
     dataset_length = []
@@ -57,7 +62,8 @@ def draw_timecomplexity_plot(filename, number):
         start_time = time.time()
         fill_the_dictionary(filename, x)
         print(dictionary)
-        solveKnapsackDynamicProgramming(dictionary["knapsack_weight"], dictionary["weights"], dictionary["values"],  len(dictionary["values"]))
+        solveKnapsackDynamicProgramming(dictionary["knapsack_weight"], dictionary["weights"], dictionary["values"],
+                                        len(dictionary["values"]))
         end_time = time.time()
         execution_timeof_dataset.append(end_time - start_time)
         dataset_length.append(len(dictionary["values"]))
@@ -70,7 +76,8 @@ def draw_timecomplexity_plot(filename, number):
     plt.plot(dataset_length, execution_timeof_dataset, marker='o')
     plt.xlabel('Input Size')
     plt.ylabel('Execution Time')
-    plt.title('{} Different Data Set\nKnapsack Algorithm Time Complexity in Dynamic Programming Approach'.format(number+1))
+    plt.title(
+        '{} Different Data Set\nKnapsack Algorithm Time Complexity in Dynamic Programming Approach'.format(number + 1))
     plt.show()
 
 
