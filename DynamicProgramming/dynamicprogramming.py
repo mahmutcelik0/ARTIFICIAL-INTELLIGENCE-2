@@ -2,9 +2,10 @@ import os.path
 import time
 import matplotlib
 import matplotlib.pyplot as plt
-
 matplotlib.use('TkAgg')
 
+
+# Veri seti saklanır.
 dictionary = {
     "values": [],
     "weights": [],
@@ -36,20 +37,45 @@ def fill_the_dictionary(file_name, dataset_number):
 
 
 def solveKnapsackDynamicProgramming(capacity, weight, values, n):
-    # 2 boyutlu array oluşturuluyor
-    # Satırlar maksimum item sayısı, sütunlar maksimum capacity dir.
+    # 2 boyutlu array oluşturuluyor. Lamda expression yöntemiyle bu array oluşturulur.
+    # Satırlar numarası çantanın alabileceği maksimum item sayısını;
+    # Sütunlar çantanın taşıyabileceği maksimum ağırlığı temsil eder.
+
     K = [[0 for x in range(capacity + 1)] for x in range(n + 1)]
 
-    # 2 Boyutlu array i bottom up yöntemi ile doldurmamızı sağlıyor.
+
+    # İki boyutlu array'de her satırı dolaşarak problemin çözümü bulunmaya çalışılır.
     for i in range(n + 1):
+        # İlgili satırdaki her bir sütun için değerler doldurulur.
+        # Değerler o andaki maksimum item sayısı (satır no),
+        # ve maksimum ağırlık (sütun no) için en çözümü temsil eder.
         for w in range(capacity + 1):
+            # İlk satır veya ilk sütunda mutlaka 0 değeri konulur.
+            # Çünkü çantanın alabileceği item sayısı 0'dır.
+            # Ya da çantanın taşıyabileceği ağırlık 0'dır.
             if i == 0 or w == 0:
                 K[i][w] = 0
+            # Eğer koyulmak istenen item çantanın o an için taşıyabileceği sınır içindeyse
+            # bu koşul çalıştırılır.
             elif weight[i - 1] <= w:
+                # O andaki değer şu şekilde belirlenir.
+
+                # O itemin değeri ile O itemin ağırlığını çantanın o andaki ağırlık kapasitesinden çıkarttığımızda
+                # oluşan değerin toplamı alınır. Yani itemin değeri ile üst satırda olan, ancak çantanın toplam
+                # ağırlık kapasitesinden itemin ağırlığının çıkarıldığı sütundaki değer toplanır.
+
+                # Çantanın taşıyabileceği ağırlık aynı olacak şekilde ama item kapasitesi bir eksik
+                # olacak şekildeki değer alınır (Bir üst satırda aynı nokta).
+
+                # Bu iki değerden en büyük olan o noktaya yazılır. Çünkü o durumda en iyi değer bu değerdir.
+
                 K[i][w] = max(values[i - 1] + K[i - 1][w - weight[i - 1]], K[i - 1][w])
+            # İtemin ağırlığı kapasiteyi aşıyorsa bir üstteki (aynı kapasitede en iyi değer) değer
+            # o noktada yazılır.
             else:
                 K[i][w] = K[i - 1][w]
-
+    # Tablonun doldurulmasıyla birlikte, en son doldurulan değer çözüm olur.
+    # Yani çözüm bütün itemlerin konulabildiği ve çantanın ilk baştaki ağırlık kapasitesinde olduğu durumdur.
     return K[n][capacity]
 
 
