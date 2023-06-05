@@ -88,7 +88,7 @@ def main():
     # In python the max recursion limit is 1000 and the hardness level of 3 exceeds it.
     # sys.setrecursionlimit(2 ^ 100)  # but It couldn't solve it still
 
-    draw_timecomplexity_plot("bruteforce_dataset.txt", 20)
+    draw_timecomplexity_plot("bruteforce_dataset.txt", 15)  # Mevcut veri setinde çözüm biraz uzun sürüyor
 
 
 main()

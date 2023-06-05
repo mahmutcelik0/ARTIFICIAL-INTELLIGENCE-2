@@ -2,8 +2,8 @@ import os.path
 import time
 import matplotlib
 import matplotlib.pyplot as plt
-matplotlib.use('TkAgg')
 
+matplotlib.use('TkAgg')
 
 # Veri seti saklanır.
 dictionary = {
@@ -42,7 +42,6 @@ def solveKnapsackDynamicProgramming(capacity, weight, values, n):
     # Sütunlar çantanın taşıyabileceği maksimum ağırlığı temsil eder.
 
     K = [[0 for x in range(capacity + 1)] for x in range(n + 1)]
-
 
     # İki boyutlu array'de her satırı dolaşarak problemin çözümü bulunmaya çalışılır.
     for i in range(n + 1):
@@ -108,7 +107,7 @@ def draw_timecomplexity_plot(filename, number):
 
 
 def main():
-    draw_timecomplexity_plot("dynamic_dataset.txt", 9)
+    draw_timecomplexity_plot("dynamic_dataset.txt", 9)  # Mevcut veri setinde çözüm biraz uzun sürüyor
 
 
 main()
