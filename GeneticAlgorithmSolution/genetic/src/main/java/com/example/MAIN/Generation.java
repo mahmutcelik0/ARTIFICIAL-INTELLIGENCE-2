@@ -234,6 +234,11 @@ public class Generation {
         return (double) maxEntry.getValue();
     }
 
+    public int[] getTheBestChromosomeGene(){
+        Map.Entry<Chromosome, Integer> maxEntry =  Collections.max(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
+        return maxEntry.getKey().getGeneOfChromosome();
+    }
+
     //Maybe will use in future
     public void printTheWorstChromosome(int number){
         Map.Entry<Chromosome, Integer> minEntry =  Collections.min(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());

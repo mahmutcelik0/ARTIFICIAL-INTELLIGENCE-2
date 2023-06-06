@@ -2,8 +2,10 @@ package com.example.MAIN;
 
 import com.example.CALCULATION.FitnessCalculator;
 import com.example.CONSTANT.Constants;
+import com.example.CONSTANT.DataSet;
 import com.example.PLOTTING.AverageAndBestPlot;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,7 @@ public class Solution {
      * 7- Stop criteria kontrolü - Belirli generation da sonuçlarda iyileşme olmazsa döngü durar
      * 8- Elde edilen verilerle grafiklerin çizdirilmesi
      * */
-    public void solve() throws CloneNotSupportedException {
+    public void solve(boolean drawPlot) throws CloneNotSupportedException {
         startTime = System.nanoTime();
 
         Generation oldGeneration = new Generation();
@@ -70,8 +72,13 @@ public class Solution {
 
         System.out.println("FINAL EXECUTED TOUR: "+ number);
 
-        plot.drawTheChart();
+        if(drawPlot){
+            plot.drawTheChart();
+        }else{
+            DataSet.saveForNeural(nextGeneration.getTheBestChromosomeGene());
+        }
     }
+
 
     //Fitness function değerlerinin güncellenmesini sağlayan metod
     //Gelen entry nin chromosome unun genleri passwordClass a yollanır ve sonuç gelen entry nin chromosome unun value suna yazılır

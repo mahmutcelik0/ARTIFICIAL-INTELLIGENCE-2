@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class DataSet {
     //Veri setinde 3 grup veri olduğu için value,weight,knapsackweight şeklinde bunları gerekli veri yapılarında sakladık
@@ -49,6 +50,50 @@ public class DataSet {
         }
     }
 
+    public static void saveForNeural(int[] theBestChromosomeGene) {
+        String rootPath = "src\\main\\java\\DATASETS\\" + StringConstants.SAVEFILENAME.getValue() + ".txt";
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try {
+            fileWriter = new FileWriter(rootPath, true);
+            bufferedWriter = new BufferedWriter(fileWriter);
+
+            String valuesString = values.stream()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" "));
+
+            String weightsString = weights.stream()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" "));
+
+            String solutionsString = Arrays.stream(theBestChromosomeGene)
+                    .mapToObj(String::valueOf)
+                    .collect(Collectors.joining(" "));
+
+            bufferedWriter.write(valuesString);
+            bufferedWriter.newLine();
+            bufferedWriter.write(weightsString);
+            bufferedWriter.newLine();
+            bufferedWriter.write(String.valueOf(knapsackWeight));
+            bufferedWriter.newLine();
+            bufferedWriter.write(solutionsString);
+            bufferedWriter.newLine();
+
+            bufferedWriter.close();
+
+            values = new ArrayList<>();
+            weights = new ArrayList<>();
+            knapsackWeight = 0;
+
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public static List<Integer> getValues() {
         return values;
     }
@@ -72,4 +117,6 @@ public class DataSet {
     public static void setKnapsackWeight(Integer knapsackWeight) {
         DataSet.knapsackWeight = knapsackWeight;
     }
+
+
 }
