@@ -7,7 +7,7 @@ public enum Constants {
     ELITCHROMOCOUNT(2),
     ELITISMPERCENT(100),
     MUTATIONPERCENT(100),
-    STOPCOUNT(250);
+    STOPCOUNT(400);
 
 
     private final int number;

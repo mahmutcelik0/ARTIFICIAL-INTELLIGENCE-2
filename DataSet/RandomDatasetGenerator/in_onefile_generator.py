@@ -7,11 +7,11 @@ import os
 values = {
     "min_value_of_weight": 1,
     "max_value_of_weight": 20,
-    "min_value_of_knapsack_weight": 100,
-    "max_value_of_knapsack_weight": 350,
-    "dataset_length": 50,
+    "min_value_of_knapsack_weight": 500,
+    "max_value_of_knapsack_weight": 2000,
+    "dataset_length": 250,
     "path_of_folder": os.path.join("..", "EXAMPLE_DATASET"),  # CHANGE
-    "dataset_file": "solve_to_genetic_50.txt",
+    "dataset_file": "solve_to_genetic_250.txt",
     "loop_count": 10000
 }
 
