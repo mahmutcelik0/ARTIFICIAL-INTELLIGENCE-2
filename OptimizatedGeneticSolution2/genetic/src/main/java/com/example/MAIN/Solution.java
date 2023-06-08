@@ -34,7 +34,7 @@ public class Solution {
 
         Generation oldGeneration = new Generation();
         oldGeneration.fillGenerationRandomly();
-        oldGeneration.addNewChromosome(greedyApproach());
+//        oldGeneration.addNewChromosome(greedyApproach());
 
         Generation nextGeneration = null;
         boolean stopCriteria = false;
@@ -49,8 +49,12 @@ public class Solution {
                 List<Chromosome> temp = oldGeneration.tournamentSelection();
                 Generation finalNextGeneration = nextGeneration;
                 oldGeneration.crossOverTwoChromosome((Chromosome) temp.get(0).clone(), (Chromosome) temp.get(1).clone()).forEach(e -> {
-                    if (finalNextGeneration.getChromosomesOfGeneration().size() != Constants.CHROMOSOMECOUNT.getNumber()) {
-                        finalNextGeneration.getChromosomesOfGeneration().put(e, FitnessCalculator.fitnessValueCalculation(e.getGeneOfChromosome()));
+                    if (finalNextGeneration.getChromosomesOfGeneration().size() != Constants.CHROMOSOMECOUNT.getNumber() ) {
+                        if(oldGeneration.nonZeroExist() && FitnessCalculator.fitnessValueCalculation(e.getGeneOfChromosome()) !=0){
+                            finalNextGeneration.getChromosomesOfGeneration().put(e, FitnessCalculator.fitnessValueCalculation(e.getGeneOfChromosome()));
+                        }else {
+                            finalNextGeneration.getChromosomesOfGeneration().put(e, FitnessCalculator.fitnessValueCalculation(e.getGeneOfChromosome()));
+                        }
                     }
                 });
             }

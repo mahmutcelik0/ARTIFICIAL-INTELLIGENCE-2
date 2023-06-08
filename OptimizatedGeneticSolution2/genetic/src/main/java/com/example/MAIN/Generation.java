@@ -16,7 +16,7 @@ public class Generation {
 
     //Sabitlerdeki kromozom sayısı kadar rastgele kromozom oluşturulur ve generation a eklenir
     public void fillGenerationRandomly() {
-        for (int x = 0; x < Constants.CHROMOSOMECOUNT.getNumber()-1; x++) { //1 tane azalttık greedyden gelen de olacak
+        for (int x = 0; x < Constants.CHROMOSOMECOUNT.getNumber();  x++) { //1 tane azalttık greedyden gelen de olacak
             Chromosome tempChromosome = new Chromosome();
             chromosomesOfGeneration.put(tempChromosome, FitnessCalculator.fitnessValueCalculation(tempChromosome.getGeneOfChromosome()));
         }
@@ -42,10 +42,11 @@ public class Generation {
      * İkisinin fitness değeri eşitse ikisi de seçilir fakat ilerleyen zamanlarda bunu değiştirmeyi planlamaktayım.
      * Çözümün başarısını düşürdüğünü düşünüyorum çünkü 0 0 sonuçlarına sahip iki tane chromosome seçilmiş olma oranı ilk başlarda yüksek
      * */
+
     public List<Chromosome> tournamentSelection() {
         Map<Chromosome, Integer> copyOfCurrentGeneration = new HashMap<>(chromosomesOfGeneration);
         List<Chromosome> returnList = new ArrayList<>();
-        for (int x = 0; x < 2 && returnList.size() <= 2; x++) {
+        while (returnList.size() <=2){
             int firstRandomNumber = random.nextInt(0, copyOfCurrentGeneration.size());
             int secondRandomNumber = random.nextInt(0, copyOfCurrentGeneration.size());
 
@@ -64,18 +65,25 @@ public class Generation {
                 returnList.add(firstPlayer.getKey());
             } else if (firstPlayer.getValue() < secondPlayer.getValue()) {
                 returnList.add(secondPlayer.getKey());
-            } else {
-                if (returnList.size() == 1) {
-                    returnList.add(firstPlayer.getKey());
-                } else {
-                    returnList.add(firstPlayer.getKey());
-                    returnList.add(secondPlayer.getKey());
-                }
-                x = 2;
+            }else {
+                returnList.add(firstPlayer.getKey());
+                returnList.add(secondPlayer.getKey());
             }
         }
         return returnList;
     }
+
+    /*
+     * else {
+     *                 if (returnList.size() == 1) {
+     *                     returnList.add(firstPlayer.getKey());
+     *                 } else {
+     *                     returnList.add(firstPlayer.getKey());
+     *                     returnList.add(secondPlayer.getKey());
+     *                 }
+     *                 x = 2;
+     *             } sildim fakat ilk generation lar tamamen 0 dan oluştuğunda problem oluştu geri ekledim
+     * */
 
     /**
      * 10 DATA SET
@@ -109,6 +117,7 @@ public class Generation {
 
 
     //TUM GENLER SIRAYLA YER DEGISTIRIR EN IYISI SECILIR
+
     /**
      * BEFORE
      * [1, 0, 1, 0, 0, 1, 1, 0, 0, 1]
@@ -209,7 +218,7 @@ public class Generation {
             int beginningFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
 
             int randomGene = random.nextInt(0, Constants.LENGTHOFDATASET.getNumber());
-            int[] temp = chromosome.getGeneOfChromosome();
+            int[] temp = chromosome.getGeneOfChromosome().clone();
             temp[randomGene] = temp[randomGene] == 1 ? 0 : 1; //1 ise 0, 0 ise 1 yapılır
 
             int afterMutationFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
@@ -219,6 +228,77 @@ public class Generation {
             }
 
         }
+    }
+
+    public void firstConcantratedMutation(Chromosome chromosome) {
+        double randomPercent = random.nextDouble(0, 100);
+        if (randomPercent < firstConcantratedMutationTechnique(FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome()))) {
+            int beginningFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
+            int randomGene = random.nextInt(0, Constants.LENGTHOFDATASET.getNumber());
+            int[] temp = chromosome.getGeneOfChromosome().clone();
+            temp[randomGene] = temp[randomGene] == 1 ? 0 : 1; //1 ise 0, 0 ise 1 yapılır
+
+            int afterMutationFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
+            if (beginningFitnessValue > 0 && afterMutationFitnessValue != 0) { //AŞMA OLMUYORSA
+                chromosome.setGeneOfChromosome(temp.clone());
+            }
+        }
+    }
+
+    public void secondConcantratedMutation(Chromosome chromosome) {
+        double randomPercent = random.nextDouble(0, 100);
+        if (randomPercent < secondConcantratedMutationTechnique(FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome())) ) {
+            int beginningFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
+            int randomGene = random.nextInt(0, Constants.LENGTHOFDATASET.getNumber());
+            int[] temp = chromosome.getGeneOfChromosome().clone();
+            temp[randomGene] = temp[randomGene] == 1 ? 0 : 1; //1 ise 0, 0 ise 1 yapılır
+
+            int afterMutationFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
+            if (beginningFitnessValue > 0 && afterMutationFitnessValue != 0) { //AŞMA OLMUYORSA
+                chromosome.setGeneOfChromosome(temp.clone());
+            }
+        }
+    }
+
+    /*
+     * Mutasyon oranı jenerasyonun fitness değerlerine göre hesaplanacak
+     * 10 tane kromozom olsun ve fitness değerleri aşağıdaki gibi olsun
+     * 10 150 150 200 200 200 250 250 300 300
+     * (Toplamları - Kromozomun Fitnessi)/toplam*100 --> Mutasyona uğrama şansı
+     * Örnek:
+     * Toplamları 2010 -- Fitness i 10 olan kromozomun şansı -> (2010 - 10)/2010*100 = %99.50
+     * Toplamları 2010 -- Fitness i 300 olan kromozomun şansı -> (2010 - 300)/2010*100 = %85
+     * Üstteki formülde mutasyon oranı hala yüksek
+     * */
+    public double firstConcantratedMutationTechnique(Integer fitnessValue) {
+        return (double) (sumOfGenerationsFitnessValue() - fitnessValue) /sumOfGenerationsFitnessValue()*100;
+    }
+
+    /*
+     * Mutasyon oranı jenerasyonun fitness değerlerine göre hesaplanacak
+     * 10 tane kromozom olsun ve fitness değerleri aşağıdaki gibi olsun
+     * 10 150 150 200 200 200 250 250 300 300
+     * Konsantrasyon Değeri = (Maksimum Fitness Değeri - İlgili Kromozomun Fitness Değeri) / (Maksimum Fitness Değeri - Minimum Fitness Değeri) * 100 --> Mutasyona uğrama şansı
+     * Örnek:
+     * Max Fitness Değeri -> 300 -- Fitness i 10 olan kromozomun şansı -> (300 - 10) / (300 - 10) * 100 = %100
+     * Max Fitness Değeri -> 300 -- Fitness i 150 olan kromozomun şansı -> (300 - 150) / (300 - 10) * 100 = %51.72
+     * Max Fitness Değeri -> 300 -- Fitness i 300 olan kromozomun şansı -> (300 - 300) / (300 - 10) * 100 = %0
+     *
+     */
+
+    public double secondConcantratedMutationTechnique(Integer fitnessValue) {
+        double temp = (calculateTheBestChromosome() - fitnessValue)/ (calculateTheBestChromosome() - calculateTheWorsChromosome())*100;
+        return temp==0?100:temp;
+    }
+
+    public int sumOfGenerationsFitnessValue(){
+        AtomicInteger temp = new AtomicInteger();
+        chromosomesOfGeneration.values().forEach(temp::addAndGet);
+        return temp.get();
     }
 
     public void printTheBestChromosome(int number) {
@@ -288,5 +368,9 @@ public class Generation {
 
     public void setChromosomesOfGeneration(Map<Chromosome, Integer> chromosomesOfGeneration) {
         this.chromosomesOfGeneration = chromosomesOfGeneration;
+    }
+
+    public boolean nonZeroExist() {
+        return chromosomesOfGeneration.entrySet().stream().filter(e-> e.getValue()!=0).toList().size()!=0?true:false;
     }
 }
