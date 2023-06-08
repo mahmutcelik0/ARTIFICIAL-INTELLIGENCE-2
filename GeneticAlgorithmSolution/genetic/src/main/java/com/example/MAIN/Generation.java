@@ -36,16 +36,17 @@ public class Generation {
 
     //TOURNAMENT SELECTION WAY
     //https://en.wikipedia.org/wiki/Tournament_selection
+
     /**
      * Tournament selection yönteminde generationdan rastgele 2 tane chromsome seçilir ve fitness değerleri karşılaştırılır.
      * Bunlardan daha yüksek olan kazanmış olur ve yeni generation a aktarılır. 1 tane daha chromosome seçilmesi için tekrardan bu olay gerçekleştirilir.
      * İkisinin fitness değeri eşitse ikisi de seçilir fakat ilerleyen zamanlarda bunu değiştirmeyi planlamaktayım.
      * Çözümün başarısını düşürdüğünü düşünüyorum çünkü 0 0 sonuçlarına sahip iki tane chromosome seçilmiş olma oranı ilk başlarda yüksek
-     * */
+     */
     public List<Chromosome> tournamentSelection() {
         Map<Chromosome, Integer> copyOfCurrentGeneration = new HashMap<>(chromosomesOfGeneration);
         List<Chromosome> returnList = new ArrayList<>();
-        for (int x = 0; x < 2 && returnList.size() <= 2; x++) {
+        while (returnList.size() <=2){
             int firstRandomNumber = random.nextInt(0, copyOfCurrentGeneration.size());
             int secondRandomNumber = random.nextInt(0, copyOfCurrentGeneration.size());
 
@@ -64,18 +65,22 @@ public class Generation {
                 returnList.add(firstPlayer.getKey());
             } else if (firstPlayer.getValue() < secondPlayer.getValue()) {
                 returnList.add(secondPlayer.getKey());
-            } else {
-                if (returnList.size() == 1) {
-                    returnList.add(firstPlayer.getKey());
-                } else {
-                    returnList.add(firstPlayer.getKey());
-                    returnList.add(secondPlayer.getKey());
-                }
-                x = 2;
             }
         }
         return returnList;
     }
+
+    /*
+     * else {
+     *                 if (returnList.size() == 1) {
+     *                     returnList.add(firstPlayer.getKey());
+     *                 } else {
+     *                     returnList.add(firstPlayer.getKey());
+     *                     returnList.add(secondPlayer.getKey());
+     *                 }
+     *                 x = 2;
+     *             } sildim
+     * */
 
     /**
      * 10 DATA SET
@@ -95,13 +100,13 @@ public class Generation {
      * AFTER
      * [1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0]
      * [1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0]
-     * */
+     */
     //Seçilen iki chromosome un ortadan sonraki genlerinin çaprazlamasını yapar
-    public List<Chromosome> crossOverTwoChromosome(Chromosome firstChromosome, Chromosome secondChromosome){
+    public List<Chromosome> crossOverTwoChromosome(Chromosome firstChromosome, Chromosome secondChromosome) {
         int[] firstChromosomeGene = firstChromosome.getGeneOfChromosome().clone();
         firstChromosome.setSecondPart(secondChromosome.getGeneOfChromosome());
         secondChromosome.setSecondPart(firstChromosomeGene);
-        return List.of(firstChromosome,secondChromosome);
+        return List.of(firstChromosome, secondChromosome);
     }
 
 
@@ -109,6 +114,7 @@ public class Generation {
 
 
     //TUM GENLER SIRAYLA YER DEGISTIRIR EN IYISI SECILIR
+
     /**
      * BEFORE
      * [1, 0, 1, 0, 0, 1, 1, 0, 0, 1]
@@ -116,13 +122,13 @@ public class Generation {
      * AFTER
      * [1, 0, 0, 1, 0, 1, 0, 0, 1, 1]
      * FITNESS FUNCTION - 83
-     * */
+     */
 
     // İki yöntem bulunuyor. En iyi chromosome two opt mutation yöntemine diğer chromosome lar normal mutation a yollanıyor
-    public void mutation(){
+    public void mutation() {
         AtomicBoolean firstElement = new AtomicBoolean(true);
-        chromosomesOfGeneration.entrySet().stream().sorted(Map.Entry.<Chromosome,Integer>comparingByValue().reversed()).forEach(e->{
-            if(firstElement.get()) {
+        chromosomesOfGeneration.entrySet().stream().sorted(Map.Entry.<Chromosome, Integer>comparingByValue().reversed()).forEach(e -> {
+            if (firstElement.get()) {
                 try {
                     e.getKey().printChromosomeGenes();
                     System.out.println(e.getValue());
@@ -131,8 +137,8 @@ public class Generation {
                 } catch (CloneNotSupportedException ex) {
                     throw new RuntimeException(ex);
                 }
-            }else{
-                normalMutation(e.getKey());
+            } else {
+                secondConcantratedMutation(e.getKey());
             }
         });
     }
@@ -145,29 +151,29 @@ public class Generation {
         int beforeTourResult = FitnessCalculator.fitnessValueCalculation(bestMutated.getGeneOfChromosome());
         boolean continueLoop = true;
 
-        while(continueLoop){ //passwordClass.fitnessFunction(tempGene)> beforeTourResult -- İyileşme olduğu sürece devam
+        while (continueLoop) { //passwordClass.fitnessFunction(tempGene)> beforeTourResult -- İyileşme olduğu sürece devam
             int[] tempGene = bestMutated.getGeneOfChromosome().clone();
 
             //Chromsome daki gene ler dolaşılır ve yer değiştirilir
-            for(int x = 0 ; x < tempGene.length-1 ; x++){
-                for(int y = x+1 ; y < tempGene.length ; y++){
+            for (int x = 0; x < tempGene.length - 1; x++) {
+                for (int y = x + 1; y < tempGene.length; y++) {
                     int current = tempGene[x];
                     tempGene[x] = tempGene[y];
                     tempGene[y] = current;
 
                     //Yeni oluşan daha iyiyse bestmutated a setlenir değilse yapılan değişiklik geri alınır
-                    if(FitnessCalculator.fitnessValueCalculation(tempGene) >FitnessCalculator.fitnessValueCalculation(bestMutated.getGeneOfChromosome())){
+                    if (FitnessCalculator.fitnessValueCalculation(tempGene) > FitnessCalculator.fitnessValueCalculation(bestMutated.getGeneOfChromosome())) {
                         bestMutated.setGeneOfChromosome(tempGene.clone());
-                    }else{
+                    } else {
                         current = tempGene[y];
                         tempGene[y] = tempGene[x];
                         tempGene[x] = current;
                     }
                 }
             }
-            if(!(FitnessCalculator.fitnessValueCalculation(tempGene) >beforeTourResult)){
+            if (!(FitnessCalculator.fitnessValueCalculation(tempGene) > beforeTourResult)) {
                 continueLoop = false;
-            }else{
+            } else {
                 beforeTourResult = FitnessCalculator.fitnessValueCalculation(tempGene);
             }
         }
@@ -200,12 +206,12 @@ public class Generation {
      * RANDOM AFTER CHANGE: 1
      * AFTER
      * [1, 1, 1, 1, 0, 0, 1, 1, 1, 0]
-     * */
+     */
     //Normal mutationda şans faktörü başarılı olursa chromosome daki rastgele bir gen 0 sa 1, 1 se 0 yapılır
     //Mutasyon sonucunda aşma olmuyorsa set lenir
-    public void normalMutation(Chromosome chromosome){
-        double randomPercent = random.nextDouble(0,100);
-        if(randomPercent < Constants.MUTATIONPERCENT.getNumber()){
+    public void normalMutation(Chromosome chromosome) {
+        double randomPercent = random.nextDouble(0, 100);
+        if (randomPercent < Constants.MUTATIONPERCENT.getNumber()) {
             int beginningFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
 
             int randomGene = random.nextInt(0, Constants.LENGTHOFDATASET.getNumber());
@@ -214,45 +220,120 @@ public class Generation {
 
             int afterMutationFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
 
-            if(beginningFitnessValue > 0 && afterMutationFitnessValue!=0){ //AŞMA OLMUYORSA
+            if (beginningFitnessValue > 0 && afterMutationFitnessValue != 0) { //AŞMA OLMUYORSA
                 chromosome.setGeneOfChromosome(temp.clone());
             }
-
         }
     }
 
+    public void firstConcantratedMutation(Chromosome chromosome) {
+        double randomPercent = random.nextDouble(0, 100);
+        if (randomPercent < firstConcantratedMutationTechnique(FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome()))) {
+            int beginningFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
+            int randomGene = random.nextInt(0, Constants.LENGTHOFDATASET.getNumber());
+            int[] temp = chromosome.getGeneOfChromosome();
+            temp[randomGene] = temp[randomGene] == 1 ? 0 : 1; //1 ise 0, 0 ise 1 yapılır
+
+            int afterMutationFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
+            if (beginningFitnessValue > 0 && afterMutationFitnessValue != 0) { //AŞMA OLMUYORSA
+                chromosome.setGeneOfChromosome(temp.clone());
+            }
+        }
+    }
+
+    public void secondConcantratedMutation(Chromosome chromosome) {
+        double randomPercent = random.nextDouble(0, 100);
+        if (randomPercent < secondConcantratedMutationTechnique(FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome())) ) {
+            int beginningFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
+            int randomGene = random.nextInt(0, Constants.LENGTHOFDATASET.getNumber());
+            int[] temp = chromosome.getGeneOfChromosome();
+            temp[randomGene] = temp[randomGene] == 1 ? 0 : 1; //1 ise 0, 0 ise 1 yapılır
+
+            int afterMutationFitnessValue = FitnessCalculator.fitnessValueCalculation(chromosome.getGeneOfChromosome());
+
+            if (beginningFitnessValue > 0 && afterMutationFitnessValue != 0) { //AŞMA OLMUYORSA
+                chromosome.setGeneOfChromosome(temp.clone());
+            }
+        }
+    }
+
+    /*
+     * Mutasyon oranı jenerasyonun fitness değerlerine göre hesaplanacak
+     * 10 tane kromozom olsun ve fitness değerleri aşağıdaki gibi olsun
+     * 10 150 150 200 200 200 250 250 300 300
+     * (Toplamları - Kromozomun Fitnessi)/toplam*100 --> Mutasyona uğrama şansı
+     * Örnek:
+     * Toplamları 2010 -- Fitness i 10 olan kromozomun şansı -> (2010 - 10)/2010*100 = %99.50
+     * Toplamları 2010 -- Fitness i 300 olan kromozomun şansı -> (2010 - 300)/2010*100 = %85
+     * Üstteki formülde mutasyon oranı hala yüksek
+     * */
+    public double firstConcantratedMutationTechnique(Integer fitnessValue) {
+        return (double) (sumOfGenerationsFitnessValue() - fitnessValue) /sumOfGenerationsFitnessValue()*100;
+    }
+
+    /*
+     * Mutasyon oranı jenerasyonun fitness değerlerine göre hesaplanacak
+     * 10 tane kromozom olsun ve fitness değerleri aşağıdaki gibi olsun
+     * 10 150 150 200 200 200 250 250 300 300
+     * Konsantrasyon Değeri = (Maksimum Fitness Değeri - İlgili Kromozomun Fitness Değeri) / (Maksimum Fitness Değeri - Minimum Fitness Değeri) * 100 --> Mutasyona uğrama şansı
+     * Örnek:
+     * Max Fitness Değeri -> 300 -- Fitness i 10 olan kromozomun şansı -> (300 - 10) / (300 - 10) * 100 = %100
+     * Max Fitness Değeri -> 300 -- Fitness i 150 olan kromozomun şansı -> (300 - 150) / (300 - 10) * 100 = %51.72
+     * Max Fitness Değeri -> 300 -- Fitness i 300 olan kromozomun şansı -> (300 - 300) / (300 - 10) * 100 = %0
+     *
+     */
+
+    public double secondConcantratedMutationTechnique(Integer fitnessValue) {
+        double temp = (calculateTheBestChromosome() - fitnessValue)/ (calculateTheBestChromosome() - calculateTheWorsChromosome())*100;
+        return temp==0?100:temp;
+    }
+
+    public int sumOfGenerationsFitnessValue(){
+        AtomicInteger temp = new AtomicInteger();
+        chromosomesOfGeneration.values().forEach(temp::addAndGet);
+        return temp.get();
+    }
+
     public void printTheBestChromosome(int number) {
-        Map.Entry<Chromosome, Integer> maxEntry =  Collections.max(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
-        System.out.print(number+". GENERATION'S BEST:\t");
+        Map.Entry<Chromosome, Integer> maxEntry = Collections.max(chromosomesOfGeneration.entrySet(), Map.Entry.comparingByValue());
+        System.out.print(number + ". GENERATION'S BEST:\t");
         maxEntry.getKey().printChromosomeGenes();
-        System.out.print("\t VALUE:"+maxEntry.getValue()+"\n");
+        System.out.print("\t VALUE:" + maxEntry.getValue() + "\n");
     }
 
     //Generationdaki en iyi fitness değerine sahip chromosome un bulunması
-    public Double calculateTheBestChromosome(){
-        Map.Entry<Chromosome, Integer> maxEntry =  Collections.max(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
+    public Double calculateTheBestChromosome() {
+        Map.Entry<Chromosome, Integer> maxEntry = Collections.max(chromosomesOfGeneration.entrySet(), Map.Entry.comparingByValue());
         return (double) maxEntry.getValue();
     }
 
-    public int[] getTheBestChromosomeGene(){
-        Map.Entry<Chromosome, Integer> maxEntry =  Collections.max(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
+    public int[] getTheBestChromosomeGene() {
+        Map.Entry<Chromosome, Integer> maxEntry = Collections.max(chromosomesOfGeneration.entrySet(), Map.Entry.comparingByValue());
         return maxEntry.getKey().getGeneOfChromosome();
     }
 
+    public Double calculateTheWorsChromosome() {
+        Map.Entry<Chromosome, Integer> minEntry = Collections.min(chromosomesOfGeneration.entrySet(), Map.Entry.comparingByValue());
+        return (double) minEntry.getValue();
+    }
+
     //Maybe will use in future
-    public void printTheWorstChromosome(int number){
-        Map.Entry<Chromosome, Integer> minEntry =  Collections.min(chromosomesOfGeneration.entrySet(),Map.Entry.comparingByValue());
-        System.out.print(number+". GENERATION'S BEST:\t");
+    public void printTheWorstChromosome(int number) {
+        Map.Entry<Chromosome, Integer> minEntry = Collections.min(chromosomesOfGeneration.entrySet(), Map.Entry.comparingByValue());
+        System.out.print(number + ". GENERATION'S BEST:\t");
         minEntry.getKey().printChromosomeGenes();
-        System.out.println("\t"+minEntry.getValue()+"\n");
+        System.out.println("\t" + minEntry.getValue() + "\n");
     }
 
     /**
      * SUM OF GENERATION FITNESS FUNCTION VALUES: 318
      * 1. GENERATION'S MEAN OF FITNESS VALUES: 15.9
-     * */
+     */
     //Generation un fitness değerlerinin ortalamasını hesaplar
-    public Double meanOfFitnessValues(){
+    public Double meanOfFitnessValues() {
         AtomicInteger sum = new AtomicInteger();
         chromosomesOfGeneration.values().forEach(sum::addAndGet);
         return sum.get() / (double) Constants.CHROMOSOMECOUNT.getNumber();
@@ -265,7 +346,7 @@ public class Generation {
         }
     }
 
-    public void updateGenerationsFitnessValues(){
+    public void updateGenerationsFitnessValues() {
         chromosomesOfGeneration.entrySet().forEach(e -> e.setValue(FitnessCalculator.fitnessValueCalculation(e.getKey().getGeneOfChromosome())));
     }
 

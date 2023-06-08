@@ -122,7 +122,7 @@ def draw_timecomplexity_plot(filename, number):
         print(len(dictionary["values"]))
         print(best_value)
 
-        write_to_solution_file(selected_items)
+        # write_to_solution_file(selected_items)
 
         dictionary["values"].clear()
         dictionary["weights"].clear()
@@ -137,7 +137,7 @@ def draw_timecomplexity_plot(filename, number):
 
 
 def main():
-    draw_timecomplexity_plot("solve_to_genetic_50.txt", 9999)  # Mevcut veri setinde çözüm biraz uzun sürüyor
+    draw_timecomplexity_plot("dataset_file.txt", 0)  # Mevcut veri setinde çözüm biraz uzun sürüyor
 
 
 main()
