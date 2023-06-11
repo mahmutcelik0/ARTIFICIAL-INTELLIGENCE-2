@@ -1,0 +1,25 @@
+
+h	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ΌÿΎΉÿÿÿÿÿ8ςθ‰1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ϊ“ιψÿÿÿÿ8‹θ‰1
+
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‘Ηφυ8Ξθ‰1
+X	java:S125M"<This block of commented-out lines of code should be removed.(Ί„Π¤8άθ‰1
+V	java:S106‰"9Replace this use of System.out or System.err by a logger.(φή¥Ο8ήθ‰1
+G
+java:S1940±")Use the opposite operator ("<=") instead.(³®ό8βθ‰1
+U	java:S106²"9Replace this use of System.out or System.err by a logger.(ω‹™
+8κθ‰1
+V	java:S106΄"9Replace this use of System.out or System.err by a logger.(©•η8λθ‰1
+U	java:S106Ι"9Replace this use of System.out or System.err by a logger.(ω‹™
+8ξθ‰1
+U	java:S106Λ"9Replace this use of System.out or System.err by a logger.(›α¥
+8οθ‰1
+[	java:S106ά"9Replace this use of System.out or System.err by a logger.(Ικό¤ÿÿÿÿÿ8πθ‰1
+p
+java:S2975ν"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(™”” 8ρθ‰1
+E
+java:S1185ν"(Remove this method to simply inherit it.(™”” 8ρθ‰1
+K
+java:S1125φ"(Remove the unnecessary boolean literals.(—γρΆόÿÿÿÿ8ÿθ‰1
+a
+java:S1155φ">Use isEmpty() to check whether the collection is empty or not.(—γρΆόÿÿÿÿ8ÿθ‰1

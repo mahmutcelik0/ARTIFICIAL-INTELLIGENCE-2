@@ -11,8 +11,8 @@ values = {
     "max_value_of_knapsack_weight": 2000,
     "dataset_length": 250,
     "path_of_folder": os.path.join("..", "EXAMPLE_DATASET"),  # CHANGE
-    "dataset_file": "solve_to_genetic_250.txt",
-    "loop_count": 10000
+    "dataset_file": "final_comparison_dataset.txt",
+    "loop_count": 2000
 }
 
 
