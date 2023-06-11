@@ -11,7 +11,7 @@ dictionary = {
     "weights": [],
     "knapsack_weight": 0,
     "path": "",
-    "solution_file_name": "result_to_neural_50.txt"
+    "solution_file_name": "final_comparison_dataset_neural.txt"
 }
 
 
@@ -122,7 +122,7 @@ def draw_timecomplexity_plot(filename, number):
         print(len(dictionary["values"]))
         print(best_value)
 
-        # write_to_solution_file(selected_items)
+        write_to_solution_file(selected_items)
 
         dictionary["values"].clear()
         dictionary["weights"].clear()
@@ -137,7 +137,7 @@ def draw_timecomplexity_plot(filename, number):
 
 
 def main():
-    draw_timecomplexity_plot("dataset_file.txt", 0)  # Mevcut veri setinde çözüm biraz uzun sürüyor
+    draw_timecomplexity_plot("final_comparison_dataset.txt", 1999)  # Mevcut veri setinde çözüm biraz uzun sürüyor
 
 
 main()
