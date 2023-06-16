@@ -16,7 +16,7 @@ public class Generation {
 
     //Sabitlerdeki kromozom sayısı kadar rastgele kromozom oluşturulur ve generation a eklenir
     public void fillGenerationRandomly() {
-        for (int x = 0; x < Constants.CHROMOSOMECOUNT.getNumber();  x++) { //1 tane azalttık greedyden gelen de olacak
+        for (int x = 0; x < Constants.CHROMOSOMECOUNT.getNumber()-1;  x++) { //1 tane azalttık greedyden gelen de olacak
             Chromosome tempChromosome = new Chromosome();
             chromosomesOfGeneration.put(tempChromosome, FitnessCalculator.fitnessValueCalculation(tempChromosome.getGeneOfChromosome()));
         }
@@ -73,18 +73,6 @@ public class Generation {
         return returnList;
     }
 
-    /*
-     * else {
-     *                 if (returnList.size() == 1) {
-     *                     returnList.add(firstPlayer.getKey());
-     *                 } else {
-     *                     returnList.add(firstPlayer.getKey());
-     *                     returnList.add(secondPlayer.getKey());
-     *                 }
-     *                 x = 2;
-     *             } sildim fakat ilk generation lar tamamen 0 dan oluştuğunda problem oluştu geri ekledim
-     * */
-
     /**
      * 10 DATA SET
      * BEFORE
@@ -113,9 +101,6 @@ public class Generation {
     }
 
 
-    //MUTATION TECHNIQUES - In future of project, we will add new techniques to improve success rate of algorithm
-
-
     //TUM GENLER SIRAYLA YER DEGISTIRIR EN IYISI SECILIR
 
     /**
@@ -141,7 +126,7 @@ public class Generation {
                     throw new RuntimeException(ex);
                 }
             }else{
-                normalMutation(e.getKey());
+                firstConcantratedMutation(e.getKey());
             }
         });
     }

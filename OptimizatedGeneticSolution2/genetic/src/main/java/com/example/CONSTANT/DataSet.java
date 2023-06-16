@@ -89,7 +89,25 @@ public class DataSet {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public static void saveResult(Integer solution,double executionTime){
+        String rootPath = "src\\main\\java\\RESULTS\\" + StringConstants.SAVETOCOMPARENAME.getValue() + ".txt";
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try {
+            fileWriter = new FileWriter(rootPath, true);
+            bufferedWriter = new BufferedWriter(fileWriter);
+
+            bufferedWriter.write(solution+"-"+executionTime);
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void calculateTheValueToWeightRatio(){

@@ -34,7 +34,7 @@ public class Solution {
 
         Generation oldGeneration = new Generation();
         oldGeneration.fillGenerationRandomly();
-//        oldGeneration.addNewChromosome(greedyApproach());
+        oldGeneration.addNewChromosome(greedyApproach());
 
         Generation nextGeneration = null;
         boolean stopCriteria = false;
@@ -79,6 +79,7 @@ public class Solution {
 
         if(drawPlot){
             plot.drawTheChart();
+            DataSet.saveResult(FitnessCalculator.fitnessValueCalculation(nextGeneration.getTheBestChromosomeGene()),(endTime-startTime)/1000000000);
         }else{
             DataSet.saveForNeural(nextGeneration.getTheBestChromosomeGene());
         }

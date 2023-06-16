@@ -78,7 +78,7 @@ def solveKnapsackDynamicProgramming(capacity, weight, values, n):
     # Yani çözüm bütün itemlerin konulabildiği ve çantanın ilk baştaki ağırlık kapasitesinde olduğu durumdur.
 
     # Hangi eşyaların seçildiğini belirlemek için geriye doğru ilerleyelim
-    selected_items = [0]*n
+    selected_items = [0] * n
     i = n
     w = capacity
     while i > 0 and w > 0:
@@ -104,6 +104,16 @@ def write_to_solution_file(solution):
         file.write("\n")
 
 
+def write_to_compare_file(solution, execution_time):
+    dictionary["path"] = os.path.join(
+        "../OptimizatedGeneticSolution2/genetic/src/main/java/RESULTS/",
+        "dynamic_programming_approach_results.txt")
+
+    with open(dictionary["path"], "a") as file:
+        file.write(str(solution) + "-" + str(execution_time))
+        file.write("\n")
+
+
 # İstenen veri seti kadarı çözdürülüyor ve en sonunda çizim gerçekleşiyor
 def draw_timecomplexity_plot(filename, number):
     execution_timeof_dataset = []
@@ -113,16 +123,18 @@ def draw_timecomplexity_plot(filename, number):
         start_time = time.time()
         fill_the_dictionary(filename, x)
         print(dictionary)
-        best_value, selected_items = solveKnapsackDynamicProgramming(dictionary["knapsack_weight"], dictionary["weights"],
-                                                   dictionary["values"],
-                                                   len(dictionary["values"]))
+        best_value, selected_items = solveKnapsackDynamicProgramming(dictionary["knapsack_weight"],
+                                                                     dictionary["weights"],
+                                                                     dictionary["values"],
+                                                                     len(dictionary["values"]))
         end_time = time.time()
         execution_timeof_dataset.append(end_time - start_time)
         dataset_length.append(len(dictionary["values"]))
         print(len(dictionary["values"]))
         print(best_value)
 
-        write_to_solution_file(selected_items)
+        # write_to_solution_file(selected_items)
+        write_to_compare_file(best_value, (end_time - start_time) / 1000000000)
 
         dictionary["values"].clear()
         dictionary["weights"].clear()
@@ -137,7 +149,7 @@ def draw_timecomplexity_plot(filename, number):
 
 
 def main():
-    draw_timecomplexity_plot("final_comparison_dataset.txt", 1999)  # Mevcut veri setinde çözüm biraz uzun sürüyor
+    draw_timecomplexity_plot("dynamic_dataset.txt", 9)  # Mevcut veri setinde çözüm biraz uzun sürüyor
 
 
 main()

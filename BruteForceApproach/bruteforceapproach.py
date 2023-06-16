@@ -68,10 +68,12 @@ def draw_timecomplexity_plot(filename, number):
         fill_the_dictionary(filename, x)
         print(dictionary)
         dataset_length.append(len(dictionary["values"]))
-        solve_knapsack(dictionary["values"], dictionary["weights"], dictionary["knapsack_weight"])
+        solution = solve_knapsack(dictionary["values"], dictionary["weights"], dictionary["knapsack_weight"])
         end_time = time.time()
         execution_timeof_dataset.append(end_time - start_time)
         print(len(dictionary["values"]))
+
+        write_to_compare_file(solution,(end_time-start_time)/1000000000)
 
         dictionary["values"].clear()
         dictionary["weights"].clear()
@@ -82,6 +84,16 @@ def draw_timecomplexity_plot(filename, number):
     plt.ylabel('Execution Time')
     plt.title('Knapsack Algorithm Time Complexity in BruteForce Approach')
     plt.show()
+
+
+def write_to_compare_file(solution, execution_time):
+    dictionary["path"] = os.path.join(
+        "../OptimizatedGeneticSolution2/genetic/src/main/java/RESULTS/",
+        "bruteforce_approach_results.txt")
+
+    with open(dictionary["path"], "a") as file:
+        file.write(str(solution) + "-" + str(execution_time))
+        file.write("\n")
 
 
 def main():

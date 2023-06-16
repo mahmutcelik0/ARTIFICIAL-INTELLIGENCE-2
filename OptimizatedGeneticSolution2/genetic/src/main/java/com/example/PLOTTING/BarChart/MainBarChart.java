@@ -31,8 +31,7 @@ public class MainBarChart{
                 Arrays.asList(
                         path+"\\bruteforce_approach_results.txt",
                         path+"\\dynamic_programming_approach_results.txt",
-                        path+"\\genetic_algorithms_approach_results.txt",
-                        path+"\\neural_network_approach_results.txt"
+                        path+"\\genetic_algorithms_approach_results.txt"
                 )
         );
 
@@ -54,9 +53,6 @@ public class MainBarChart{
                     }else if(e.contains("genetic")){
                         resultBarChart.addValueToGeneticAlgorithmCategory(Double.parseDouble(values[0]),Integer.toString(number));
                         executionTimeBarChart.addValueToGeneticAlgorithmCategory(Double.parseDouble(values[1]),Integer.toString(number));
-                    }else{
-                        resultBarChart.addValueToNeuralNetworkCategory(Double.parseDouble(values[0]),Integer.toString(number));
-                        executionTimeBarChart.addValueToNeuralNetworkCategory(Double.parseDouble(values[1]),Integer.toString(number));
                     }
                     number++;
                 }
@@ -118,10 +114,6 @@ class DrawBarChart {
         addValueToDataset(value,"GENETIC ALGORITHM",columnKey);
     }
 
-    //KACINCI COZUM OLDUGUNU ALACAK ve NEURAL NETWORK SERISINE EKLEYECEK
-    public void addValueToNeuralNetworkCategory(Double value, String columnKey){
-        addValueToDataset(value,"NEURAL NETWORK",columnKey);
-    }
 
     public void addValueToDataset(Double value, String rowKey, String columnKey){
         dataset.addValue(value,rowKey,columnKey);
